@@ -26,6 +26,10 @@ router.get('/', function(req, res, next) {
   res.render('/public/index.html');
 });
 
+router.get('/test', function(req, res, next) {
+  res.send({test: '123'});
+});
+
 // Initial page redirecting to Github
 router.get('/auth', function (req, res) {
     res.redirect(authorization_uri);
