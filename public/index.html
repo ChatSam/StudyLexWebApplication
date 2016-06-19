@@ -15,29 +15,37 @@
 	<body background = "Images/Background.jpg">
 		<div id='Container' ng-controller="BlogVwCtrl" class="col-lg-12 text-center">
 
-				<form action="" method="post" form="newPost">
+				<form form="newPost">
+					Subject: <br>
+					<input type="text" name="Subject" ng-model="newpost.subject"><br>
 					Question: <br>
 					<input type="text" name="Question" ng-model="newpost.question"><br>
-					Hint: <br>
-					<input type="text" name="Hint" ng-model="newpost.hint"><br>
+					Hint 1: <br>
+					<input type="text" name="Hint1" ng-model="newpost.hint1"><br>
+					Hint 2: <br>
+					<input type="text" name="Hint2" ng-model="newpost.hint2"><br>
+					Hint 3: <br>
+					<input type="text" name="Hint3" ng-model="newpost.hint3"><br>
 					Answer: <br>
 					<input type="text" name="Answer" ng-model="newpost.answer"><br>
 					<br>
+					More Info: <br>
+					<input type="text" name="Moreinfo" ng-model="newpost.more"><br>
 					<p><button ng-click="submitPost(this)">Submit</button></p>
 				</form>
 
-				<div class="blog">
-					<div class="intro">
-						<h2>Blog Posts</h1>
+				<div ng-repeat="post in blog" class="blog-container">
+					<div class="blog-box">
+						<p>{{post.subject}}</p>
+						<p>{{post.question}}</p>
+						<p>{{post.hint1}}</p>
+						<p>{{post.hint2}}</p>
+						<p>{{post.hint3}}</p>
+						<p>{{post.more}}</p>
+						<span>{{post.time | date:'medium'}}</span>
+						<button ng-click="deletePost(post._id)">Delete</button>
 					</div>
-					<div ng-repeat="post in blog" class="blog-container">
-						<div class="blog-box">
-							<p>{{post.question}}</p>
-							<span>{{post.hint}}</span>
-							<button ng-click="deletePost(post._id)">Delete</button>
-						</div>
-					</div>
-				</div>
+				</div>s
 
 		</div>
 	</body>

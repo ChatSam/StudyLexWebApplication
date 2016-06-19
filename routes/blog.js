@@ -3,29 +3,33 @@ var router = express.Router();
 // var OAuth = require('oauth');
 var http = require('http');
 
+var questions = [];
+
 /*
  * GET blogposts.
  */
 router.get('/posts', function(req, res, next) {
-	var db = req.db;
-	var collection = db.get('blog');
-	collection.find({},{},function(e,docs) {
-		res.json(docs);
-	});
+	// var db = req.db;
+	// var collection = db.get('blog');
+	// collection.find({},{},function(e,docs) {
+		res.json(questions);
+	// });
 });
 
 /*
  * POST to addblogpost
  */
 router.post('/addpost', function(req, res, next) {
-	var db = req.db;
-	var collection = db.get('blog');
+	// var db = req.db;
+	// var collection = db.get('blog');
 	console.log(req.body);
-	collection.insert(req.body, function(err, result) {
-		res.send(
-			(err === null) ? {msg: ''} : {msg: err}
-		);
-	});
+	questions.push(req.body);
+	res.send({msg: ''});
+	// collection.insert(req.body, function(err, result) {
+	// 	res.send(
+	// 		(err === null) ? {msg: ''} : {msg: err}
+	// 	);
+	// });
 });
 
 /*
