@@ -19,7 +19,7 @@
 					Subject: <br>
 					<input type="text" name="Subject" ng-model="newpost.subject"><br>
 					Question: <br>
-					<input type="text" name="Question" ng-model="newpost.question"><br>
+					<textarea type="text" name="Question" ng-model="newpost.question"></textarea><br>
 					Hint 1: <br>
 					<input type="text" name="Hint1" ng-model="newpost.hint1"><br>
 					Hint 2: <br>
@@ -30,7 +30,8 @@
 					<input type="text" name="Answer" ng-model="newpost.answer"><br>
 					<br>
 					More Info: <br>
-					<input type="text" name="Moreinfo" ng-model="newpost.more"><br>
+					<textarea type="text" name="Moreinfo" ng-model="newpost.more"></textarea>
+					<br>
 					<p><button ng-click="submitPost(this)">Submit</button></p>
 				</form>
 
@@ -45,7 +46,7 @@
 						<span>{{post.time | date:'medium'}}</span>
 						<button ng-click="deletePost(post._id)">Delete</button>
 					</div>
-				</div>s
+				</div>
 
 		</div>
 	</body>

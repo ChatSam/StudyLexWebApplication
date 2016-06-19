@@ -20,6 +20,11 @@ form{
   color: white;
 }
 
+textarea {
+    color: black;
+    width: 74%;
+}
+
 #result {
     margin: 10px;
     background: #eee;

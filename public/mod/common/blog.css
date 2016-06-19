@@ -7,7 +7,9 @@ body {
   	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-#Container {}
+#Container {
+	float: none;
+}
 
 .container {
 	width: 1000px;
@@ -115,7 +117,7 @@ a {
     font-size: 1.5em;
     margin-right: 0.1%;
     background-color: #479061;
-} 
+}
 
 .row li a {
 	margin: 0 auto;
@@ -125,4 +127,4 @@ a {
 .row li:hover {
 	background-color: #00B7FF;
 	color: #479061;
-} 
+}
