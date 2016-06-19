@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // Set up the mongodb connectino
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/blogappexpress');
+//var mongo = require('mongodb');
+//var monk = require('monk');
+// var db = monk('localhost:27017/blogappexpress');
 
 
 var routes = require('./routes/index');
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-  req.db = db;
+  // req.db = db;
   next();
 });
 
