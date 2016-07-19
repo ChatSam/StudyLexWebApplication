@@ -5,6 +5,14 @@ var express = require('express');
 var router = express.Router();
 
 
+//todo:
+// By 25/07
+// - checks done
+// - Implement CRUD
+
+
+
+
 var flashcardDataSet  =
     [{
         id:1,
@@ -90,19 +98,18 @@ router.get('/delete', function(request, response, next){
 })
 
 
-router.post('/delete/:id', function(request, response, next){
-    for(var card in flashcardDataSet){
+router.delete('/delete/:id', function(request, response){
 
+    for(var card in flashcardDataSet){
         var currentCard = flashcardDataSet[card]
 
         if(currentCard.id.toString() === request.params.id.toString()) {
 
-            //flashcardDataSet[card].remove();
-
-            response.status(200).send(flashcardDataSet);
-            //break;
+            flashcardDataSet.splice(card,1)
+            response.send(flashcardDataSet);
         }
     }
+    response.send("fail");
 })
 
 
