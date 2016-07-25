@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-// Set up the mongodb connectino
+// Set up the mongodb connection
 //var mongo = require('mongodb');
 //var monk = require('monk');
 // var db = monk('localhost:27017/blogappexpress');
 
-
+var mongoose = require('mongoose');
+var fs = require ('fs');
 var routes = require('./routes/index');
 var blog = require('./routes/blog');
 var fcards = require('./routes/flashcards');
@@ -60,6 +60,10 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+
+    //connect to the database
+    mongoose.connect('mongodb://localhost:27017/flashCardDB');
+
 }
 
 // production error handler

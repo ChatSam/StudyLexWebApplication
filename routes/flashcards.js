@@ -3,71 +3,56 @@
  */
 var express = require('express');
 var router = express.Router();
-
-
-//todo:
-// By 25/07
-// - checks done
-// - Implement CRUD
+var mongoose = require('mongoose');
+var fs = require ('fs');
+var path = require('path')
 
 
 
+fs.readdirSync('/Drive D/Alexa/StudyLexa/webApp/models/').forEach(function(filename) {
+    if (~filename.indexOf('.js')) require('/Drive D/Alexa/StudyLexa/webApp/models/'+filename);
+});
 
-var flashcardDataSet  =
-    [{
-        id:1,
-        question:"Which animal is known as the king of the jungle?",
-        answer: "Lion",
-        hint:"There is a disney cartoon trilogy featuring this animal",
-        more:"This animal is a carnivore",
-        subject:"Animals"
-    },{
-        id:2,
-        question:"Who is dubbed the fastest man on earth?",
-        answer: "Usain Bolt",
-        hint:"He is from Jamaica",
-        more:"This person holds the fastest 100m and 200m sprint in track.",
-        subject:"Sports"
-    }];
+var flashCardsModel = mongoose.model('flashCardsModel');
 
 /* list all the flashcards */
-router.get('/',function (request,response, next) {
-    response.send(flashcardDataSet);
+router.get('/',function (req,res, next) {
+
+    flashCardsModel.find(function(err,fcard){
+        if(err){
+            res.send(err);
+        }
+        res.send(fcard);
+    });
 })
 
 
 /* get a specific flashcard by id*/
 router.get('/:id',function (req, res){
 
-     for(var card in flashcardDataSet){
-
-         var currentCard = flashcardDataSet[card]
-
-        if(currentCard.id.toString() === req.params.id.toString()) {
-            res.status(200).send(currentCard);
-            console.log(currentCard)
-            //break;
+    flashCardsModel.find({_id: req.params.id},function(err,fcard){
+        if(err){
+            res.send(err);
         }
-    }
+        res.send(fcard);
+
+    });
 })
 
 
 /* sort flashcards by subjects */
-router.get('/subject/:subject', function (request, response, next){
-    for(var card in flashcardDataSet){
+router.get('/subject/:subject', function (req, res, next){
 
-        var currentCard = flashcardDataSet[card]
-
-        if(currentCard.subject.toString() === request.params.subject.toString()) {
-            response.status(200).send(currentCard);
-            console.log(currentCard)
-            //break;
+    flashCardsModel.find({subject: req.params.subject},function(err,fcard){
+        if(err) {
+            res.send(err);
         }
-    }
+        res.send(fcard);
+    });
 })
 
 
-/* create flashcards */
+/* load create flashcards view */
 router.get('/create',function(request, response, next){
 
 })
@@ -77,39 +62,56 @@ router.post('/create',function(req, res){
 
     console.log(newCard);
 
-    flashcardDataSet.push(newCard);
+    //var fcard = new flashCard(newCard);
+    var flashCard = new flashCardsModel(newCard);
 
-    res.status(200).send(flashcardDataSet)
+    flashCard.save(function(err,data){
+        if(err){
+            res.json(err)
+        }
+        res.json(data);
+
+    });
+
 })
 
 
-/* update flashcards*/
+/* load update flashcards view*/
 router.get('/update',function (request, response, next){
 
 })
 
-router.post('/update',function(request, response, next){
+router.post('/update/:id',function(req, res, next){
+    flashCardsModel.findByIdAndUpdate(req.params.id,{$set:req.body},function (err, data) {
+        if(err){
+            return handleError(err);
+        }
+
+        res.send(data);
+    });
 
 })
 
-/* delete flashcards */
+/* load delete flashcards view*/
 router.get('/delete', function(request, response, next){
 
 })
 
 
-router.delete('/delete/:id', function(request, response){
+router.delete('/delete/:id', function(req, res){
 
-    for(var card in flashcardDataSet){
-        var currentCard = flashcardDataSet[card]
-
-        if(currentCard.id.toString() === request.params.id.toString()) {
-
-            flashcardDataSet.splice(card,1)
-            response.send(flashcardDataSet);
+    flashCardsModel.find({_id: req.params.id},function(err,fcard){
+        if(err){
+            res.send(err);
         }
-    }
-    response.send("fail");
+
+    }).remove(function(err){
+        if(err) throw err;
+
+        res.send("Deleted")
+    });
+
+
 })
 
 
