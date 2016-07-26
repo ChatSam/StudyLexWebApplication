@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var fs = require ('fs');
-var path = require('path')
+var path = require('path');
 
 
 
@@ -20,7 +20,7 @@ router.get('/',function (req,res, next) {
 
     flashCardsModel.find(function(err,fcard){
         if(err){
-            res.send(err);
+            res.send(err.message);
         }
         res.send(fcard);
     });
@@ -32,10 +32,9 @@ router.get('/:id',function (req, res){
 
     flashCardsModel.find({_id: req.params.id},function(err,fcard){
         if(err){
-            res.send(err);
+            res.send("Invalid flashcard");
         }
         res.send(fcard);
-
     });
 })
 
@@ -45,7 +44,7 @@ router.get('/subject/:subject', function (req, res, next){
 
     flashCardsModel.find({subject: req.params.subject},function(err,fcard){
         if(err) {
-            res.send(err);
+            res.send("No such subject");
         }
         res.send(fcard);
     });
@@ -62,12 +61,11 @@ router.post('/create',function(req, res){
 
     console.log(newCard);
 
-    //var fcard = new flashCard(newCard);
     var flashCard = new flashCardsModel(newCard);
 
     flashCard.save(function(err,data){
         if(err){
-            res.json(err)
+            res.send("Error ");
         }
         res.json(data);
 
@@ -84,7 +82,7 @@ router.get('/update',function (request, response, next){
 router.post('/update/:id',function(req, res, next){
     flashCardsModel.findByIdAndUpdate(req.params.id,{$set:req.body},function (err, data) {
         if(err){
-            return handleError(err);
+            res.send("Update Error");
         }
 
         res.send(data);
@@ -102,15 +100,16 @@ router.delete('/delete/:id', function(req, res){
 
     flashCardsModel.find({_id: req.params.id},function(err,fcard){
         if(err){
-            res.send(err);
+            res.send("Error 1");
         }
 
     }).remove(function(err){
-        if(err) throw err;
+        if(err){
+            res.send(err);
+        }
 
         res.send("Deleted")
     });
-
 
 })
 

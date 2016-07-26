@@ -9,14 +9,13 @@ var Schema = mongoose.Schema;
 //setting up the schema for the flash cards data model
 
 var flashCardSchema = new Schema({
-    card: String,
-    question: String,
-    answer: String,
-    hint: String,
-    more: String,
-    subject: String
+    card: {type: String},
+    question: {type: String, required: true},
+    answer: {type: String, required: true},
+    hint: {type: String},
+    more: {type: String},
+    subject: {type: String, required: true}
 });
-
 
 
 mongoose.model('flashCardsModel', flashCardSchema);
