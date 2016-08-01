@@ -10,24 +10,20 @@ angular.module("blogApp", [])
 	}
 
 	$scope.getBlogPosts = function() {
-		$.get( "/blog/posts", function( data ) {
 
-  			$scope.blog = data;
-  			$scope.$apply();
+		$.get("/flashcards/",function(data){
+			$scope.cardSet = data;
+			$scope.$apply();
 		});
 	};
 
 	$scope.deletePost = function(id) {
-		// console.log("delete post " + id + ".");
-		// $.delete( "/blog/deletepost/" +id, function( data ) {
-  // 			$scope.getBlogPosts();
-		// });
 
 		$.ajax({
-		    url: "/blog/deletepost/" +id,
-		    type: 'DELETE',
-		    success: $scope.getBlogPosts(),
-		    error: console.log("error")
+			url:"/flashcards/delete/"+id,
+			type:'DELETE',
+			success: $scope.getBlogPosts(),
+			error: console.log("Error. Cannot delete flashcard")
 		});
 	};
 
@@ -36,11 +32,22 @@ angular.module("blogApp", [])
 		$scope.newpost.time = now;
 		console.log($scope.newpost);
 
-		$.post( "/blog/addpost", $scope.newpost,function( data ) {
-
-  			$scope.getBlogPosts();
-		});
+		$.post("/flashcards/create", $scope.newpost)
+			.success(function(data){
+				$scope.getBlogPosts();
+			})
+			.error(function(){
+				window.alert("Cannot save flashcard.")
+			});
 	};
+
+	// $scope.editCard = function(id){
+	// 	$.get("/flashcards/"+id, function(data){
+	// 		$scope.newpost.blogmsg = data;
+	// 		$scope.$apply();
+	// 	});
+    //
+	// };
 
 	$scope.getBlogPosts();
 	

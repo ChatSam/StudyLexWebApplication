@@ -23,11 +23,7 @@
 					Question: <br>
 					<textarea type="text" name="Question" ng-model="newpost.question"></textarea><br>
 					Hint 1: <br>
-					<input type="text" name="Hint1" ng-model="newpost.hint1"><br>
-					Hint 2: <br>
-					<input type="text" name="Hint2" ng-model="newpost.hint2"><br>
-					Hint 3: <br>
-					<input type="text" name="Hint3" ng-model="newpost.hint3"><br>
+					<input type="text" name="Hint1" ng-model="newpost.hint"><br>
 					Answer: <br>
 					<input type="text" name="Answer" ng-model="newpost.answer"><br>
 					<br>
@@ -37,16 +33,15 @@
 					<p><button ng-click="submitPost(this)">Submit</button></p>
 				</form>
 
-				<div ng-repeat="post in blog" class="blog-container">
+				<div ng-repeat="post in cardSet" class="blog-container">
 					<div class="blog-box">
 						<p>{{post.subject}}</p>
 						<p>{{post.question}}</p>
-						<p>{{post.hint1}}</p>
-						<p>{{post.hint2}}</p>
-						<p>{{post.hint3}}</p>
+						<p>{{post.hint}}</p>
 						<p>{{post.more}}</p>
 						<span>{{post.time | date:'medium'}}</span>
 						<button ng-click="deletePost(post._id)">Delete</button>
+						<!--<button ng-click="editCard(post._id)">Edit</button>-->
 					</div>
 				</div>
 
