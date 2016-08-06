@@ -19,6 +19,10 @@ angular.module('myApp', [
                         templateUrl: "app/state1/view.html",
                         controller: function($scope) {
                             $scope.now = new Date().toString();
+
+                            $("#click-me").click(function() {
+                                alert("you clicked me!");
+                            });
                         }
                     }    
                 }
