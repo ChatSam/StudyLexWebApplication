@@ -14,8 +14,7 @@ Included here:
 
 Thing's we still need to add:
 
-- Webpack - bundling
-- 
+7. Webpack - bundling 
 
 
 ## 1. Node
@@ -106,6 +105,10 @@ Lodash is the successor of Underscore.js, which is a great utility library for
 js. find more [here](https://lodash.com/).
 
 
+## 7. Webpack
 
+Webpack is a bundling tool designed to make pages load faster for users by 
+combining all of the code we send to the client into a few files and compressing
+those. While important, we can integrate this later.
 
 
