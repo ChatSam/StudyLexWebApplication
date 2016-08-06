@@ -58,4 +58,54 @@ To understand what controls this, you'll need to open up package.json. In here, 
 can see which scripts are configured and which packages npm will try to install. 
 
 
-config set strict-ssl false
+
+## 3. Angular
+
+Angular is installed (via npm) and configured for this project. Look at js/app.js 
+to checkout angular. Notice a few things
+
+1. angular.module is how you create the angular project and load any necessary 
+modules. 
+2. angular.config is normally used for configuring high level routing. Here I am
+configuring the state providers as well, but you should typically configure these
+in separate files. Write some good, and we can fix the layout later. 
+3. Notice you when you want to inject something, you write it as 
+
+    angular.method('thing1', 'thing2', function(thing1, thing2) { ...})
+
+
+## 4. Angular UI Router
+
+Angular UI router is included in the project in the .module method, and injected
+into a function with $stateProvider. A couple of things
+
+1. .state configures a state. 
+    1. url configures which url will be in the location bar.
+    2. views configures which views should be inserted where (see below)
+    3. templateUrl is which file should be loaded for the view
+    4. controller lets you define a controller to inject code
+2. index.html file has a few things worth noting as well
+    1. ui-sref is how you send change the current page state
+    2. the current loaded state is 'index'
+    3. ui-view shows where the views are injected. 
+
+## 5. Express
+
+Express 
+
+Express is a node.js server side framework. there is a test routes at 
+localhost:3003/data/test that currently works. You can trace the express code
+through server.js, express/routes.js, and express/demo.js. 
+
+The module.exports is a format designed to work with node's require() method to 
+give a clean way of modularizing code. 
+
+## 6. Lodash
+
+Lodash is the successor of Underscore.js, which is a great utility library for 
+js. find more [here](https://lodash.com/).
+
+
+
+
+
