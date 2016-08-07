@@ -4,11 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// Set up the mongodb connection
-//var mongo = require('mongodb');
-//var monk = require('monk');
-// var db = monk('localhost:27017/blogappexpress');
 
+//using mongoose for CRUD operations
 var mongoose = require('mongoose');
 var fs = require ('fs');
 var routes = require('./routes/index');

@@ -1,5 +1,5 @@
 angular.module("blogApp", [])
-.controller('BlogVwCtrl', function ($scope) {
+.controller('BlogVwCtrl', function ($scope,$http) {
 	console.log("got the blog View");
 
 	$scope.blog = {}; 
@@ -11,20 +11,22 @@ angular.module("blogApp", [])
 
 	$scope.getBlogPosts = function() {
 
-		$.get("/flashcards/",function(data){
+		$http.get("/flashcards").success(function(data){
 			$scope.cardSet = data;
-			$scope.$apply();
 		});
 	};
 
 	$scope.deletePost = function(id) {
 
-		$.ajax({
-			url:"/flashcards/delete/"+id,
-			type:'DELETE',
-			success: $scope.getBlogPosts(),
-			error: console.log("Error. Cannot delete flashcard")
-		});
+		$http.delete(
+			"/flashcards/delete/"+id
+			).then(
+			function success(){
+				$scope.getBlogPosts()
+			},
+			function error(){
+				console.log("Error. Cannot delete flashcard")
+			});
 	};
 
 	$scope.submitPost = function(form) {
@@ -32,7 +34,7 @@ angular.module("blogApp", [])
 		$scope.newpost.time = now;
 		console.log($scope.newpost);
 
-		$.post("/flashcards/create", $scope.newpost)
+		$http.post("/flashcards/create", $scope.newpost)
 			.success(function(data){
 				$scope.getBlogPosts();
 			})
