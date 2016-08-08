@@ -3,7 +3,21 @@
 Hey, I tried to make a blank project (with some small samples) to get us started. 
 I want to make sure we have a good foundation so we can kickstart our development. 
 
-Included here:
+## Running the project
+
+To fire up the server, pull down the repo, open the directory, and run
+
+    npm start
+
+This should install any packages you need, then fire up the server to listen
+on port 3003. If this conflicts with something you already have running, you 
+can change the port in server.js. Then take any browser and head to 
+
+    localhost:3003
+
+You should see 3 links, which each do something when clicked. 
+
+## What's included here
 
 1. node.js - server written in js
 2. npm - node package manager
