@@ -79,13 +79,31 @@ router.get('/update',function (request, response, next){
 
 })
 
-router.post('/update/:id',function(req, res, next){
-    flashCardsModel.findByIdAndUpdate(req.params.id,{$set:req.body},function (err, data) {
-        if(err){
-            res.send("Update Error");
-        }
+router.post('/update/',function(req, res, next){
 
-        res.send(data);
+    var newCard = req.body;
+
+    flashCardsModel.findById(newCard._id,function (err, flashCardData) {
+        if(err){
+            res.send("can't find flash card");
+
+        }else{
+            console.log(newCard.question);
+            flashCardData.subject = newCard.subject;
+            flashCardData.question = newCard.question;
+            flashCardData.hint = newCard.hint;
+            flashCardData.answer = newCard.answer;
+            flashCardData.more = newCard.more;
+
+            console.log(flashCardData);
+
+            flashCardData.save(function(err,data){
+                if(err){
+                    res.send("Error ");
+                }
+                res.json(data);
+            });
+        }
     });
 
 })

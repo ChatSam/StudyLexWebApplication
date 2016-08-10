@@ -5,10 +5,16 @@ angular.module("blogApp", [])
 	$scope.blog = {}; 
 
 	$scope.newpost= {
-		blogmsg: "",
-		time: ""
+		time: "",
+		subject:"",
+		question:"",
+		hint:"",
+		answer:"",
+		more:""
 	}
 
+	$scope.card="";
+	
 	$scope.getBlogPosts = function() {
 
 		$http.get("/flashcards").success(function(data){
@@ -34,22 +40,47 @@ angular.module("blogApp", [])
 		$scope.newpost.time = now;
 		console.log($scope.newpost);
 
+		//var exist = $http.get("/flashcards/"+)
+
 		$http.post("/flashcards/create", $scope.newpost)
 			.success(function(data){
 				$scope.getBlogPosts();
+
 			})
 			.error(function(){
 				window.alert("Cannot save flashcard.")
 			});
 	};
 
-	// $scope.editCard = function(id){
-	// 	$.get("/flashcards/"+id, function(data){
-	// 		$scope.newpost.blogmsg = data;
-	// 		$scope.$apply();
-	// 	});
-    //
-	// };
+
+	$scope.editCard = function(index){
+
+		$scope.newpost = $scope.cardSet[index];
+
+		console.log("Print output ");
+
+	}
+
+	$scope.updatePost = function(){
+			console.log($scope.newpost);
+			console.log($scope.newPost);
+
+			$http.post("/flashcards/update/", $scope.newpost)
+				.success(function(data){
+					$scope.getBlogPosts();
+					console.log("post success")
+
+					//updateButton.toggle();
+					//mainButton.toggle();
+				})
+				.error(function(){
+					window.alert("Cannot save flashcard.");
+				});
+
+
+
+	}
+
 
 	$scope.getBlogPosts();
 	
