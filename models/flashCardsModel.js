@@ -1,7 +1,6 @@
 /**
- * Created by Chat on 7/24/16.
+ * Created by Chat on 7/24/16..
  */
-
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
