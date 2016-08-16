@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myApp', [
-    'ui.router'
+    'ui.router',
+    'myApp.voice'
 ])
 .config(['$stateProvider', 
     function($stateProvider) {

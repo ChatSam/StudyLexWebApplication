@@ -10,3 +10,4 @@ module.exports = function() {
         res.send("some information");
     }
 }
+
