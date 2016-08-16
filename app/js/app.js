@@ -11,14 +11,14 @@ angular.module('myApp', [
             .state("index", {
                 url: "/",
                 views: {
-                    "viewA": {templateUrl: "app/state1/flcards.html"}
+                    "viewA": {templateUrl: "../home/flcards.html"}
                 }
             })
             .state("state1", {
                 url: "/state1",
                 views: {
                     "viewA": {
-                        templateUrl: "app/state1/view.html",
+                        templateUrl: "../state1/view.html",
                         controller: function($scope) {
                             $scope.now = new Date().toString();
 
@@ -32,8 +32,8 @@ angular.module('myApp', [
             .state("state2", {
                 url: "/state2",
                 views: {
-                    "viewA": { templateUrl: "app/state2/view1.html" },
-                    "viewB": { templateUrl: "app/state2/view2.html" }
+                    "viewA": { templateUrl: "../state2/view1.html" },
+                    "viewB": { templateUrl: "../state2/view2.html" }
                 }
             });
 }])

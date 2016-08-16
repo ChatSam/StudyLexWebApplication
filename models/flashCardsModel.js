@@ -16,5 +16,4 @@ var flashCardSchema = new Schema({
     subject: {type: String, required: true}
 });
 
-
-mongoose.model('flashCardsModel', flashCardSchema);
+module.exports = mongoose.model('flashCardsModel', flashCardSchema);
