@@ -1,52 +1,31 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
-	<head>
-		<link rel="stylesheet" type="text/css" href="mod/common/blog.css"></link>
-		<link href="CSS/bootstrap.min.css" rel="stylesheet">
-		<link href="CSS/Style.css" rel="stylesheet">
+<div id='Container' ng-controller="BlogVwCtrl" class="col-lg-12 text-center">
 
-		<script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
-		<script type="text/javascript" src="vendor/angular-1.4.3.min.js"></script>
-		<script type="text/javascript" src="vendor/ui-router-0.2.15.min.js"></script>
-		<script type="text/javascript" src="vendor/underscore-1.8.3.min.js"></script>
-		<script type="text/javascript" src="app/app.js"></script>
-		<link rel="shortcut icon" type="image/png" href="Images/Favicon.png"/>
+		<form form="newPost" id="inputForm">
+			Subject:<br>
+			<input type="text" name="Subject" ng-model="newpost.subject"  ><br>
+			Question: <br>
+			<textarea type="text" name="Question" ng-model="newpost.question"></textarea><br>
+			Hint 1: <br>
+			<input type="text" name="Hint1" ng-model="newpost.hint"><br>
+			Answer: <br>
+			<input type="text" name="Answer" ng-model="newpost.answer"><br>
+			<br>
+			More Info: <br>
+			<textarea type="text" name="Moreinfo" ng-model="newpost.more"></textarea>
+			<br>
+			<p><button ng-click="submitPost(this)" id="mainButton">Submit</button>
+				<button ng-click="updatePost(this)" id="updateButton" >Update</button></p>
+		</form>
 
-	</head>
-	<title> StudyLex </title>
-	<body background = "Images/Background.jpg">
-		<div id='Container' ng-controller="BlogVwCtrl" class="col-lg-12 text-center">
-
-				<form form="newPost" id="inputForm">
-					Subject:<br>
-					<input type="text" name="Subject" ng-model="newpost.subject"  ><br>
-					Question: <br>
-					<textarea type="text" name="Question" ng-model="newpost.question"></textarea><br>
-					Hint 1: <br>
-					<input type="text" name="Hint1" ng-model="newpost.hint"><br>
-					Answer: <br>
-					<input type="text" name="Answer" ng-model="newpost.answer"><br>
-					<br>
-					More Info: <br>
-					<textarea type="text" name="Moreinfo" ng-model="newpost.more"></textarea>
-					<br>
-					<p><button ng-click="submitPost(this)" id="mainButton">Submit</button>
-						<button ng-click="updatePost(this)" id="updateButton" >Update</button></p>
-				</form>
-
-				<div ng-repeat="post in cardSet" class="blog-container">
-					<div class="blog-box">
-						<p>{{post.subject}}</p>
-						<p>{{post.question}}</p>
-						<p>{{post.hint}}</p>
-						<p>{{post.more}}</p>
-						<span>{{post.time | date:'medium'}}</span>
-						<button ng-click="deletePost(post._id)">Delete</button>
-						<button ng-click="editCard($index)">Edit</button>
-					</div>
-				</div>
-
+		<div ng-repeat="post in cardSet track by $index" class="blog-container">
+			<div class="blog-box">
+				<p>{{post.subject}}</p>
+				<p>{{post.question}}</p>
+				<p>{{post.hint}}</p>
+				<p>{{post.more}}</p>
+				<span>{{post.time | date:'medium'}}</span>
+				<button ng-click="deletePost(post._id)">Delete</button>
+				<button ng-click="editCard($index)">Edit</button>
+			</div>
 		</div>
-	</body>
-
-</html>
+</div>

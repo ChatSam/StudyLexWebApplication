@@ -56,9 +56,9 @@ angular.module('myApp', [
 
 	$scope.getBlogPosts = function() {
 
-		$http.get("/flashcards").success(function(data){
-			$scope.cardSet = data;
-		});
+		// $http.get("/flashcards").success(function(data){
+		// 	$scope.cardSet = data;
+		// });
 	};
 
 	$scope.deletePost = function(id) {
