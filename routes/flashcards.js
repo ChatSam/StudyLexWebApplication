@@ -6,12 +6,10 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var path = require('path');
-var FlashCardsModel = require('../models/flashCardsModel');
-
-// module.exports = function(router){
+var flashCardsModel = require('../models/flashCardsModel');
 
 /* list all the flashcards */
-router.get('/',function (req,res, next) {
+router.get('/cards',function (req, res) {
     console.log("pulling the cards.")
     flashCardsModel.find(function(err,fcard){
         if(err){
@@ -118,5 +116,4 @@ router.delete('/delete/:id', function(req, res){
     });
 })
 
-// }
 module.exports = router;
