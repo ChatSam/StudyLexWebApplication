@@ -6,7 +6,7 @@
   function BlogVwCtrl ($scope, $http) {
 	console.log("got the blog View");
 
-	$scope.blog = {};
+	$scope.cardSet = [];
 
 	$scope.newpost= {
 		time: "",
@@ -21,9 +21,11 @@
 
 	$scope.getBlogPosts = function() {
 
-		$http.get("/flashcards").success(function(data){
+		$http.get("/flashcards").then(function(data){
 			$scope.cardSet = data;
-		});
+		}, function () {
+      $scope.cardSet = [];
+    });
 	};
 
 	$scope.deletePost = function(id) {
@@ -52,7 +54,7 @@
 
 			})
 			.error(function(){
-				window.alert("Cannot save flashcard.")
+        console.log("Cannot save flashcard.")
 			});
 	};
 
@@ -78,7 +80,7 @@
 					//mainButton.toggle();
 				})
 				.error(function(){
-					window.alert("Cannot save flashcard.");
+					console.log("Cannot save flashcard.");
 				});
 	}
 	$scope.getBlogPosts();

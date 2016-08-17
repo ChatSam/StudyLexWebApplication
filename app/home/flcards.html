@@ -13,18 +13,20 @@
 			More Info: <br>
 			<textarea type="text" name="Moreinfo" ng-model="newpost.more"></textarea>
 			<br>
-			<p><button ng-click="submitPost(this)" id="mainButton">Submit</button>
-				<button ng-click="updatePost(this)" id="updateButton" >Update</button></p>
+			<p>
+				<button ng-click="submitPost(this)" id="mainButton">Submit</button>
+				<button ng-click="updatePost(this)" id="updateButton">Update</button>
+			</p>
 		</form>
 
-		<div ng-repeat="post in cardSet track by $index" class="blog-container">
+		<div ng-repeat="card in cardSet" class="blog-container">
 			<div class="blog-box">
-				<p>{{post.subject}}</p>
-				<p>{{post.question}}</p>
-				<p>{{post.hint}}</p>
-				<p>{{post.more}}</p>
-				<span>{{post.time | date:'medium'}}</span>
-				<button ng-click="deletePost(post._id)">Delete</button>
+				<p>{{card.subject}}</p>
+				<p>{{card.question}}</p>
+				<p>{{card.hint}}</p>
+				<p>{{card.more}}</p>
+				<span>{{card.time | date:'medium'}}</span>
+				<button ng-click="deletePost(card._id)">Delete</button>
 				<button ng-click="editCard($index)">Edit</button>
 			</div>
 		</div>
