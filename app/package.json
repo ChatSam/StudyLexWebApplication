@@ -1,0 +1,9 @@
+{
+  "name": "elev8-web-app-client",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}
