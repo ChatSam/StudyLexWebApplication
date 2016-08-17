@@ -21,8 +21,8 @@
 
 	$scope.getBlogPosts = function() {
 
-		$http.get("/flashcards/cards").then(function(data){
-			$scope.cardSet = data;
+		$http.get("/flashcards/cards").then(function(result){
+			$scope.cardSet = result.data;
 		}, function () {
       $scope.cardSet = [];
     });

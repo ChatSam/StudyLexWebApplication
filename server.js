@@ -1,6 +1,9 @@
 var express = require('express'),
+    mongoose = require('mongoose'),
     path = require('path'),
     app = express();
+
+mongoose.connect('mongodb://localhost:27017/flashCardDB');
 
 var cardRoutes = require('./routes/flashcards');
 // Import my cards routes into the path '/flashcards'

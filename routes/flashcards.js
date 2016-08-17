@@ -47,11 +47,24 @@ router.get('/create',function(request, response, next){
 })
 
 router.post('/create',function(req, res){
-  console.log("create the cards.")
-    var newCard = req.body;
     console.log("create the cards.")
+    console.log(req)
+      console.log(req.IncomingMessage);
+    // console.log(req.IncomingMessage._readableState.ReadableState);
+    console.log(req.body);
+    var newCard = req.body;
     console.log(newCard);
 
+    if(!newCard){
+      newCard = {
+        time: "",
+        subject:"Test",
+        question:"Who am I?",
+        hint:"Not a doctor.",
+        answer:"A person.",
+        more:"Who is ok."
+      }
+    }
     var flashCard = new flashCardsModel(newCard);
 
     flashCard.save(function(err,data){
