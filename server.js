@@ -13,7 +13,7 @@ app.get('*', function(req, res) {
 
 // flashcards
 // routes
-var routesPath = path.join(__dirname, './express/flashcards.js');
+var routesPath = path.join(__dirname, './routes/flashcards.js');
 console.log('routes path: ' + routesPath);
 require(routesPath)(app);
 console.log('s 11');
