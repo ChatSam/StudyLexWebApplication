@@ -1,9 +1,12 @@
 var express = require('express'),
     mongoose = require('mongoose'),
+    bodyParser = require('body-parser'),
     path = require('path'),
     app = express();
 
 mongoose.connect('mongodb://localhost:27017/flashCardDB');
+
+app.use(bodyParser.json());
 
 var cardRoutes = require('./routes/flashcards');
 // Import my cards routes into the path '/flashcards'

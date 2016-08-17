@@ -2,7 +2,6 @@
  * Created by Chat on 7/16/16.
  */
 var express = require('express');
-// var router = express.Router();
 var mongoose = require('mongoose');
 var router = express.Router();
 var path = require('path');
@@ -46,25 +45,12 @@ router.get('/create',function(request, response, next){
 
 })
 
-router.post('/create',function(req, res){
+router.post('/create', function(req, res){
     console.log("create the cards.")
-    console.log(req)
-      console.log(req.IncomingMessage);
-    // console.log(req.IncomingMessage._readableState.ReadableState);
-    console.log(req.body);
+    // console.log(req, res, req.body, res.body);
     var newCard = req.body;
     console.log(newCard);
 
-    if(!newCard){
-      newCard = {
-        time: "",
-        subject:"Test",
-        question:"Who am I?",
-        hint:"Not a doctor.",
-        answer:"A person.",
-        more:"Who is ok."
-      }
-    }
     var flashCard = new flashCardsModel(newCard);
 
     flashCard.save(function(err,data){

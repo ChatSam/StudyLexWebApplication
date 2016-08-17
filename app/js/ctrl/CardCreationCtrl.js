@@ -43,12 +43,11 @@
 
 	$scope.submitPost = function(form) {
 		var now = new Date().getTime();
-		$scope.newpost.time = now;
+		var thisCard = $scope.newpost;
+    thisCard.time = now;
 		console.log($scope.newpost);
 
-		//var exist = $http.get("/flashcards/"+)
-
-		$http.post("/flashcards/create", $scope.newpost)
+		$http.post("/flashcards/create", thisCard)
 			.success(function(data){
 				$scope.getBlogPosts();
 
