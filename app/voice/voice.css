@@ -1,0 +1,7 @@
+.listening {
+    border: 10px solid green;
+}
+
+.speaking {
+    border: 10px solid blue;
+}
