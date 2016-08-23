@@ -318,6 +318,10 @@ h5{
 	color: black;
 }
 
+.blog-box {
+	background: azure;
+}
+
 .slider-title{
 	font-size: 60px;
 	line-height: 80px;
