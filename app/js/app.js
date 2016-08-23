@@ -7,35 +7,55 @@ angular.module('myApp', [
 .config(['$stateProvider',
     function($stateProvider) {
         $stateProvider
-            .state("index", {
+            .state("home", {
                 url: "/",
                 views: {
-                    "viewA": {
-                      templateUrl: "../home/flcards.html",
+                    "home": {
+                      templateUrl: "../views/home/home.html",
+                      controller: function() {
+                                    // new WOW().init();
+                                    // $.backstretch([
+                                    //   "images/bg/bg1.jpg",
+                                    // ], {
+                                    //   fade: 950,
+                                    //   duration: 10000
+                                    // });
+                                    // $('.counter').counterUp({
+                                    //   delay: 100,
+                                    //   time: 2000
+                                    // });
+                                  }
+                    }
+                }
+            })
+            .state("newcard", {
+                url: "/newcard",
+                views: {
+                    "newcard": {
+                      templateUrl: "../views/newcard/flcards.html",
                       controller: 'BlogVwCtrl'
                     }
                 }
             })
-            .state("state1", {
-                url: "/state1",
+            .state("signin", {
+                url: "/signin",
                 views: {
-                    "viewA": {
-                        templateUrl: "../state1/view.html",
+                    "signin": {
+                        templateUrl: "../views/signin/signin.html",
                         controller: function($scope) {
-                            $scope.now = new Date().toString();
-
-                            $("#click-me").click(function() {
-                                alert("you clicked me!");
-                            });
+                            // $scope.now = new Date().toString();
+                            //
+                            // $("#click-me").click(function() {
+                            //     alert("you clicked me!");
+                            // });
                         }
                     }
                 }
             })
-            .state("state2", {
-                url: "/state2",
+            .state("signup", {
+                url: "/signup",
                 views: {
-                    "viewA": { templateUrl: "../state2/view1.html" },
-                    "viewB": { templateUrl: "../state2/view2.html" }
+                    "signup": { templateUrl: "../views/signup/signup.html" }
                 }
             });
 }])
