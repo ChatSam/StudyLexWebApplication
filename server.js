@@ -4,7 +4,7 @@ var express = require('express'),
     path = require('path'),
     app = express();
 
-mongoose.connect('mongodb://localhost:27017/flashCardDB');
+mongoose.connect('mongodb://13.66.58.64:27017/flashCardDB');
 
 app.use(bodyParser.json());
 
