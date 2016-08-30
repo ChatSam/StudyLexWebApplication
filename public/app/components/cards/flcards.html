@@ -1,0 +1,31 @@
+<div id='Container' ng-controller="CardsCtrl" class="container">
+	<table class="table">
+	<thead>
+		<tr>
+			<th>Subject</th>
+			<th>Question</th>
+			<th>Answer</th>
+			<th>Hint</th>
+			<th>More</th>
+			<th>Commited</th>
+			<th class='action'>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="card in cardSet">
+			<td>{{card.subject}}</td>
+			<td>{{card.question}}</td>
+			<td>{{card.answer}}</td>
+			<td>{{card.hint}}</td>
+			<td>{{card.more}}</td>
+			<td>{{card.time | date:'medium'}}</td>
+			<td>
+				<div class='action'>
+					<button type="button" ng-click="editCard($index)" class="btn btn-primary">Edit</button>
+					<button type="button" ng-click="deletePost(card._id)" class="btn btn-danger">Delete</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>

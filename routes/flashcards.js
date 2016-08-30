@@ -6,11 +6,18 @@ mongoose = require('mongoose'),
 router = express.Router(),
 path = require('path'),
 flashCardsModel = require('../models/flashCardsModel'),
-passport = require('passport');;
+passport = require('passport'),
+Account = require('../models/account');
+
+var auth = function(req, res, next){
+  !req.isAuthenticated() ? res.send(401) : next();
+};
 
 /* list all the flashcards */
-router.get('/cards',function (req, res) {
-    console.log("pulling the cards.")
+router.get('/cards', function (req, res) {
+    console.log("pulling the cards.");
+    console.log(passport);
+    passport.authenticate('local')
     flashCardsModel.find(function(err,fcard){
         if(err){
             res.send(err.message);
@@ -20,7 +27,7 @@ router.get('/cards',function (req, res) {
 });
 
 /* get a specific flashcard by id*/
-router.get('/:id',function (req, res){
+router.get('/:id', auth, function (req, res){
 
     flashCardsModel.find({_id: req.params.id},function(err,fcard){
         if(err){
@@ -31,7 +38,7 @@ router.get('/:id',function (req, res){
 })
 
 /* sort flashcards by subjects */
-router.get('/subject/:subject', function (req, res, next){
+router.get('/subject/:subject', auth, function (req, res, next){
 
     flashCardsModel.find({subject: req.params.subject},function(err,fcard){
         if(err) {
@@ -46,8 +53,9 @@ router.get('/create',function(request, response, next){
 
 })
 
-router.post('/create', function(req, res){
+router.post('/create', auth, function(req, res){
     console.log("create the cards.")
+    console.log(passport);
     // console.log(req, res, req.body, res.body);
     var newCard = req.body;
     console.log(newCard);
@@ -68,8 +76,9 @@ router.get('/update',function (request, response, next){
 
 })
 
-router.post('/update/',function(req, res, next){
-    console.log("update the cards.")
+router.post('/update/', auth, function(req, res, next){
+    console.log("update the cards.");
+    console.log(passport);
     var newCard = req.body;
     flashCardsModel.findById(newCard._id,function (err, flashCardData) {
         if(err){
@@ -100,7 +109,7 @@ router.get('/delete', function(request, response, next){
 
 })
 
-router.delete('/delete/:id', function(req, res){
+router.delete('/delete/:id', auth, function(req, res){
     console.log("delete the cards.")
     flashCardsModel.find({_id: req.params.id},function(err,fcard){
         if(err){
@@ -123,22 +132,26 @@ router.post('/register', function(req, res) {
         }
 
         passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
+          console.log('Registered now try to redirect.');
+          res.send({redirect: 'home'});
         });
     });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
+    res.send(req.user);
 });
 
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+router.post('/logout', function(req, res) {
+    req.logOut();
+    res.send(200);
 });
 
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
+router.get('/loggedin', function(req, res){
+    console.log('session Check')
+    console.log(req)
+    console.log(res)
+    res.send(req.isAuthenticated() ? req.user : '0');
 });
 
 module.exports = router;
