@@ -1,11 +1,12 @@
 /**
  * Created by Chat on 7/16/16.
  */
-var express = require('express');
-var mongoose = require('mongoose');
-var router = express.Router();
-var path = require('path');
-var flashCardsModel = require('../models/flashCardsModel');
+var express = require('express'),
+mongoose = require('mongoose'),
+router = express.Router(),
+path = require('path'),
+flashCardsModel = require('../models/flashCardsModel'),
+passport = require('passport');;
 
 /* list all the flashcards */
 router.get('/cards',function (req, res) {
@@ -114,5 +115,30 @@ router.delete('/delete/:id', function(req, res){
         res.send("Deleted")
     });
 })
+
+router.post('/register', function(req, res) {
+    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+        if (err) {
+            return res.render('register', { account : account });
+        }
+
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        });
+    });
+});
+
+router.post('/login', passport.authenticate('local'), function(req, res) {
+    res.redirect('/');
+});
+
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+router.get('/ping', function(req, res){
+    res.status(200).send("pong!");
+});
 
 module.exports = router;
