@@ -1,9 +1,9 @@
 
 (function() {
-  angular.module('myApp').controller('BlogVwCtrl', BlogVwCtrl)
+  angular.module('myApp').controller('CreateCtrl', CreateCtrl)
 
-  BlogVwCtrl.$inject = ['$scope', '$http'];
-  function BlogVwCtrl ($scope, $http) {
+  CreateCtrl.$inject = ['$scope', '$http', '$stateParams', '$state'];
+  function CreateCtrl ($scope, $http, $stateParams, $state) {
 	console.log("got the blog View");
 
 	$scope.cardSet = [];
@@ -18,15 +18,6 @@
 	}
 
 	$scope.card="";
-
-	$scope.getBlogPosts = function() {
-
-		$http.get("/flashcards/cards").then(function(result){
-			$scope.cardSet = result.data;
-		}, function () {
-      $scope.cardSet = [];
-    });
-	};
 
 	$scope.deletePost = function(id) {
 
@@ -49,8 +40,7 @@
 
 		$http.post("/flashcards/create", thisCard)
 			.success(function(data){
-				$scope.getBlogPosts();
-
+        $state.go('cards');
 			})
 			.error(function(){
         console.log("Cannot save flashcard.")
@@ -82,8 +72,6 @@
 					console.log("Cannot save flashcard.");
 				});
 	}
-	$scope.getBlogPosts();
-
 }
 
 })();

@@ -1,0 +1,13 @@
+<div id='Container' ng-controller="CardsCtrl" class="col-lg-12 text-center">
+	<div ng-repeat="card in cardSet" class="blog-container">
+		<div class="blog-box">
+			<p>{{card.subject}}</p>
+			<p>{{card.question}}</p>
+			<p>{{card.hint}}</p>
+			<p>{{card.more}}</p>
+			<span>{{card.time | date:'medium'}}</span>
+			<button ng-click="deletePost(card._id)">Delete</button>
+			<button ng-click="editCard($index)">Edit</button>
+		</div>
+	</div>
+</div>

@@ -30,12 +30,12 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
-var staticPath = path.join(__dirname, '/app');
+var staticPath = path.join(__dirname, '/public');
 console.log('static path: ' + staticPath);
 app.use(express.static(staticPath));
 
 app.get('*', function(req, res) {
-    var staticPath = path.join(__dirname, '/app/index.html');
+    var staticPath = path.join(__dirname, '/public/index.html');
     res.sendFile(staticPath);
 });
 

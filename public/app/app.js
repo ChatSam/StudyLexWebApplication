@@ -7,36 +7,29 @@ angular.module('myApp', [
 .config(['$stateProvider',
     function($stateProvider) {
         $stateProvider
-            .state("index", {
+            .state("home", {
                 url: "/",
-                views: {
-                    "viewA": {
-                      templateUrl: "../home/flcards.html",
-                      controller: 'BlogVwCtrl'
-                    }
-                }
+                templateUrl: "./app/components/home/home.html"
             })
-            .state("state1", {
-                url: "/state1",
-                views: {
-                    "viewA": {
-                        templateUrl: "../state1/view.html",
-                        controller: function($scope) {
-                            $scope.now = new Date().toString();
-
-                            $("#click-me").click(function() {
-                                alert("you clicked me!");
-                            });
-                        }
-                    }
-                }
+            .state("login", {
+                url: "/login",
+                templateUrl: "./app/components/login/login.html",
+                controller: 'LoginCtrl'
             })
-            .state("state2", {
-                url: "/state2",
-                views: {
-                    "viewA": { templateUrl: "../state2/view1.html" },
-                    "viewB": { templateUrl: "../state2/view2.html" }
-                }
+            .state("cards", {
+              url: "/cards",
+              templateUrl: './app/components/cards/flcards.html',
+              controller: 'CardsCtrl'
+            })
+            .state("create", {
+              url: "/create",
+              templateUrl: './app/components/create/create.html',
+              controller: 'CreateCtrl'
+            })
+            .state("register", {
+              url: "/register",
+              templateUrl: './app/components/register/register.html',
+              controller: 'RegisterCtrl'
             });
 }])
 
