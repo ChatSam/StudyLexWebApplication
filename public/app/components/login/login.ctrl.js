@@ -9,11 +9,14 @@
 		username: "",
 		password:""
 	}
+  $scope.test = function(){
+    console.log('test the login');
+  }
 
-	$scope.login = function(){
+	$scope.loginApp = function(){
 			console.log($scope.account);
 
-			$http.post("/flashcards/login/", $scope.account)
+			$http.post("/flashcards/login", $scope.account)
 				.success(function(data){
 					console.log("post success")
 

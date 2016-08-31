@@ -6,7 +6,8 @@ mongoose = require('mongoose'),
 router = express.Router(),
 path = require('path'),
 flashCardsModel = require('../models/flashCardsModel'),
-passport = require('passport');;
+passport = require('passport'),
+Account = require('../models/account');
 
 /* list all the flashcards */
 router.get('/cards',function (req, res) {

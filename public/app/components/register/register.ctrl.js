@@ -2,8 +2,8 @@
 (function() {
   angular.module('myApp').controller('RegisterCtrl', RegisterCtrl)
 
-  RegisterCtrl.$inject = ['$scope', '$http'];
-  function RegisterCtrl ($scope, $http) {
+  RegisterCtrl.$inject = ['$scope', '$http', '$stateParams', '$state'];
+  function RegisterCtrl ($scope, $http, $stateParams, $state) {
     console.log("RegisterCtrl");
 
   	$scope.newAccount= {
@@ -16,7 +16,9 @@
 
   		$http.post("/flashcards/register", $scope.newAccount)
   		  .success(function(data){
-  			     console.log("post success")
+          $state.go('/');
+  			  console.log("post success");
+
   			})
   			.error(function(){
   				console.log("Cannot save newAccount.");
