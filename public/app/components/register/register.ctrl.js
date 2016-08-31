@@ -16,7 +16,7 @@
 
   		$http.post("/flashcards/register", $scope.newAccount)
   		  .success(function(data){
-          $state.go('/');
+          $state.go('home');
   			  console.log("post success");
 
   			})
