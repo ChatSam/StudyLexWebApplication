@@ -1,3 +1,8 @@
-#click-me {
-    margin: 50px;
-}
+#Elev8 .table>tbody>tr>td,
+#Elev8 .table>tbody>tr>th,
+#Elev8 .table>tfoot>tr>td,
+#Elev8 .table>tfoot>tr>th,
+#Elev8 .table>thead>tr>td,
+#Elev8 .table>thead>tr>th {
+  padding: 4px 8px;
+  }

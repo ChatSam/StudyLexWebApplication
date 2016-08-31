@@ -1,20 +1,41 @@
-<div id='Container' ng-controller="CreateCtrl" class="col-lg-12 text-center">
-	<form form="newPost" id="inputForm">
-		Subject:<br>
-		<input type="text" name="Subject" ng-model="newpost.subject"  ><br>
-		Question: <br>
-		<textarea type="text" name="Question" ng-model="newpost.question"></textarea><br>
-		Hint 1: <br>
-		<input type="text" name="Hint1" ng-model="newpost.hint"><br>
-		Answer: <br>
-		<input type="text" name="Answer" ng-model="newpost.answer"><br>
-		<br>
-		More Info: <br>
-		<textarea type="text" name="Moreinfo" ng-model="newpost.more"></textarea>
-		<br>
-		<p>
-			<button ng-click="submitPost(this)" id="mainButton">Submit</button>
-			<button ng-click="updatePost(this)" id="updateButton">Update</button>
-		</p>
-	</form>
+<div id='Container' ng-controller="CreateCtrl" class="container">
+<h2>Create Your Card</h2>
+<form class="form-horizontal" form="newPost" id="inputForm">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Subject">Subject:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="Subject" placeholder="Enter Subject" name="Subject" ng-model="newpost.subject">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Question">Question:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="Question" placeholder="Enter Question"  name="question" ng-model="newpost.question">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Hint">Hint:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="Hint" placeholder="Enter Hint"  name="hint" ng-model="newpost.hint">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="Answer">Answer:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="Answer" placeholder="Enter Answer" name="answer" ng-model="newpost.answer">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="More">More Info:</label>
+		<div class="col-sm-10">
+			<input type="text" class="form-control" id="More" placeholder="Enter More" name="more" ng-model="newpost.more">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button ng-click="submitPost(this)" class="btn btn-default">Submit</button>
+			<button ng-click="updatePost(this)" class="btn btn-primary">Update</button>
+		</div>
+	</div>
+</form>
 </div>
