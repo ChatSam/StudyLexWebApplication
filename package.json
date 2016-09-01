@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "prestart": "npm install && cd app && npm install"
+    "postinstall": "cd app && npm install"
   },
   "dependencies": {
     "angular": "^1.5.8",
