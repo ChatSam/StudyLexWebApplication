@@ -3,9 +3,9 @@
 angular.module('myApp', [
     'ui.router'
 ])
-.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-    function($stateProvider, $urlRouterProvider, $httpProvider) {
 
+.config(['$stateProvider',
+    function($stateProvider) {
         $stateProvider
             .state("home", {
                 url: "/",
@@ -26,56 +26,15 @@ angular.module('myApp', [
               templateUrl: './app/components/create/create.html',
               controller: 'CreateCtrl'
             })
-            .state("logout", {
-              url: "/logout",
-              templateUrl: './app/components/logout/logout.html',
-              controller: 'LogoutCtrl'
-            })
             .state("register", {
               url: "/register",
               templateUrl: './app/components/register/register.html',
               controller: 'RegisterCtrl'
             });
-            $urlRouterProvider.otherwise('/');
-            $httpProvider.interceptors.push('APIInterceptor');
 }])
-.service('UserService', function(store) {
-    var service = this,
-        currentUser = null;
-    service.setCurrentUser = function(user) {
-        currentUser = user;
-        store.set('user', user);
-        return currentUser;
-    };
-    service.getCurrentUser = function() {
-        if (!currentUser) {
-            currentUser = store.get('user');
-        }
-        return currentUser;
-    };
-})
-.service('APIInterceptor', function($rootScope) {
-    var service = this;
-    service.request = function(response) {
-      console.log('*** success');
-      console.log(response);
-        $rootScope.statue = true;
-        return response;
-    };
-    service.responseError = function(response) {
-      console.log('*** error');
-      console.log(response);
-        if (response.status === 401) {
-            $rootScope.statue = false;
-           $state.go('login');
-        }
-        return response;
-    };
-})
+
 // Debugging ui-router
 .run(['$rootScope', function($rootScope) {
-    $rootScope.state = false;
-
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
         console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
     });
@@ -97,25 +56,4 @@ angular.module('myApp', [
         console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
         console.log(unfoundState, fromState, fromParams);
     });
-  }]);
-
-var checkLoggedin = function($q, $timeout, $http, $state, $rootScope) {
-  // Initialize a new promise
-  var deferred = $q.defer();
-  // Make an AJAX call to check if the user is logged in
-  $http.get('/flashcards/loggedin')
-    .success(function(user){
-      // Authenticated
-      if (user !== '0') {
-        $rootScope.state = true;
-        deferred.resolve();
-      // Not Authenticated
-      } else {
-        $rootScope.state = false;
-        $rootScope.message = 'You need to log in.';
-        deferred.reject();
-        $state.state('login');
-      }
-    });
-return deferred.promise;
-};
+}]);

@@ -16,12 +16,15 @@
 
   		$http.post("/flashcards/register", $scope.newAccount)
   		  .success(function(data){
+
           $state.go(data.redirect);
+
   			  console.log("post success");
 
   			})
   			.error(function(){
   				console.log("Registration Failed.");
+
   			});
   	}
 }

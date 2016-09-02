@@ -2,8 +2,10 @@
 (function() {
   angular.module('myApp').controller('CardsCtrl', CardsCtrl)
 
+
   CardsCtrl.$inject = ['$scope', '$http', '$stateParams', '$state', '$rootScope'];
   function CardsCtrl ($scope, $http, $stateParams, $state, $rootScope) {
+
 	console.log("CardsCtrl");
 
 	$scope.cardSet = [];
@@ -27,6 +29,7 @@
       $scope.cardSet = [];
       $rootScope.state = false;
       $state.go('login');
+
     });
 	};
 
@@ -40,7 +43,9 @@
 			},
 			function error(){
 				console.log("Error. Cannot delete flashcard")
+
         $state.go('home');
+
 			});
 	};
 

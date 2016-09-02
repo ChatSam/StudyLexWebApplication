@@ -9,9 +9,11 @@ flashCardsModel = require('../models/flashCardsModel'),
 passport = require('passport'),
 Account = require('../models/account');
 
+
 var auth = function(req, res, next){
   !req.isAuthenticated() ? res.send(401) : next();
 };
+
 
 /* list all the flashcards */
 router.get('/cards', function (req, res) {
@@ -126,14 +128,18 @@ router.delete('/delete/:id', auth, function(req, res){
 })
 
 router.post('/register', function(req, res) {
+    console.log('Register');
+    console.log(req.body);
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
             return res.render('register', { account : account });
         }
-
+        console.log('Registered this');
         passport.authenticate('local')(req, res, function () {
           console.log('Registered now try to redirect.');
+
           res.send({redirect: 'home'});
+
         });
     });
 });
