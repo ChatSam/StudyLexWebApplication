@@ -33,6 +33,10 @@
   color:white;
 }
 
+.btn{
+  border-radius: 0px;
+}
+
 .alexa-pane{
   color: #dadada;
   background-color: #000000;
@@ -41,14 +45,15 @@
 .steps-pane{
   background-color:rgba(56,156,236,1);
   color:white;
-  padding-bottom: 4%;
+  padding-bottom: 2%;
+  padding-top: 2%;
 }
 
 .steps-pane p,h4 {
   text-align: center;
 }
 
-.steps-pane p{
+.steps-pane p,a{
   color: #3f4359;
   font-size: 16px;
   font-weight: bold;
@@ -56,14 +61,27 @@
   padding-right: 30pt;
 }
 
+
+.steps-pane{
+  background-color:rgba(56,156,236,1);
+  color:white;
+  padding-bottom: 2%;
+  padding-top: 2%;
+}
+
+.why-pane{
+  color: rgb(47, 113, 183);
+}
+
+
 .base{
-  background-color: #535353;
+  color: #999cab;
+  background-color: #3f4359;
   margin-top: 3%;
-  margin-bottom: 2%;
   padding-top: 2%;
   padding-bottom: 2%;
 }
 
 .logo{
-  background-image: url("resources/logo1.png");
+  background-image: url("../home/logo1.png");
 }
