@@ -95,3 +95,37 @@
 .form-control{
   border-radius: 0px;
 }
+
+.paper-texture{
+  border: #171514;
+  background-color: #fff;
+  background-image:
+          linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+          linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 1.2em;
+}
+
+
+table {
+  border-collapse: separate;
+  -webkit-border-vertical-spacing: 5pt;
+
+}
+
+tbody tr{
+  background-color: #e5e5e5;
+}
+
+td {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  vertical-align: middle;
+  color: #0071a8;
+
+}
+
+.hand-text{
+  font-family: "Comic Sans MS" ;
+}
+
+
