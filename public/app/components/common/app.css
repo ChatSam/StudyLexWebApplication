@@ -1,0 +1,28 @@
+#Elev8 .table>tbody>tr>td,
+#Elev8 .table>tbody>tr>th,
+#Elev8 .table>tfoot>tr>td,
+#Elev8 .table>tfoot>tr>th,
+#Elev8 .table>thead>tr>td,
+#Elev8 .table>thead>tr>th {
+  padding: 4px 8px;
+}
+
+#Elev8 .table>thead>tr>th.action {
+  text-align: center;
+  width: 15%;
+}
+
+#Elev8 .table>tbody>tr>td .action {
+  display: table;
+  margin: 0px auto;
+}
+
+#Elev8 .table>tbody>tr>td .action .btn {
+  margin: 0 2px;
+}
+
+.spinner {
+  text-align: center;
+  display: table;
+  margin: 0 auto;
+}
