@@ -87,7 +87,7 @@
 				});
 	}
 
-  $scope.checkSession();
+  // $scope.checkSession();
 
 }
 
