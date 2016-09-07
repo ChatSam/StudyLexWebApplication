@@ -49,8 +49,9 @@
 			});
 	};
 
-	$scope.updatePost = function(){
-			console.log('go to update posts');
+	$scope.editCard = function(card_id){
+    console.log(card_id);
+    $state.go('edit', { id: card_id});
 	}
 	$scope.getBlogPosts();
 

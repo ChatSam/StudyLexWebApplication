@@ -29,6 +29,11 @@ angular.module('myApp', [
               templateUrl: './app/components/create/create.html',
               controller: 'CreateCtrl'
             })
+            .state("edit", {
+              url: "/edit/:id",
+              templateUrl: './app/components/create/create.html',
+              controller: 'CreateCtrl'
+            })
             .state("logout", {
                 url: "/logout",
                 templateUrl: "./app/components/logout/logout.html",

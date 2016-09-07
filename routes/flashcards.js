@@ -85,10 +85,7 @@ router.post('/update/', auth, function(req, res, next){
     console.log("update the cards.");
     console.log(passport);
     var newCard = req.body;
-    flashCardsModel.find({
-      _id: newCard._id,
-      cardOwner: req.user._id
-    }, function (err, flashCardData) {
+    flashCardsModel.findById(newCard._id, function (err, flashCardData) {
         if(err){
             res.send("can't find flash card");
 
