@@ -13,7 +13,8 @@ var flashCardSchema = new Schema({
     answer: {type: String, required: true},
     hint: {type: String},
     more: {type: String},
-    subject: {type: String, required: true}
+    subject: {type: String, required: true},
+    cardOwner: {type: String, required: true}
 });
 
 module.exports = mongoose.model('flashCardsModel', flashCardSchema);

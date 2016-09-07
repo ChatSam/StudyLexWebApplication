@@ -16,11 +16,11 @@ var auth = function(req, res, next){
 
 
 /* list all the flashcards */
-router.get('/cards', function (req, res) {
+router.get('/cards', auth, function (req, res) {
     console.log("pulling the cards.");
     console.log(passport);
-    passport.authenticate('local')
-    flashCardsModel.find(function(err,fcard){
+
+    flashCardsModel.find({cardOwner: req.user._id},function(err,fcard){
         if(err){
             res.send(err.message);
         }
@@ -31,7 +31,10 @@ router.get('/cards', function (req, res) {
 /* get a specific flashcard by id*/
 router.get('/:id', auth, function (req, res){
 
-    flashCardsModel.find({_id: req.params.id},function(err,fcard){
+    flashCardsModel.find({
+      _id: req.params.id,
+      cardOwner: req.user._id
+    },function(err,fcard){
         if(err){
             res.send("Invalid flashcard");
         }
@@ -42,7 +45,10 @@ router.get('/:id', auth, function (req, res){
 /* sort flashcards by subjects */
 router.get('/subject/:subject', auth, function (req, res, next){
 
-    flashCardsModel.find({subject: req.params.subject},function(err,fcard){
+    flashCardsModel.find({
+      subject: req.params.subject,
+      cardOwner: req.user._id
+    },function(err,fcard){
         if(err) {
             res.send("No such subject");
         }
@@ -56,14 +62,11 @@ router.get('/create',function(request, response, next){
 })
 
 router.post('/create', auth, function(req, res){
-    console.log("create the cards.")
-    console.log(passport);
-    // console.log(req, res, req.body, res.body);
     var newCard = req.body;
     console.log(newCard);
-
     var flashCard = new flashCardsModel(newCard);
 
+    flashCard.cardOwner = req.user._id;
     flashCard.save(function(err,data){
         if(err){
             res.send("Error ");
@@ -82,7 +85,10 @@ router.post('/update/', auth, function(req, res, next){
     console.log("update the cards.");
     console.log(passport);
     var newCard = req.body;
-    flashCardsModel.findById(newCard._id,function (err, flashCardData) {
+    flashCardsModel.find({
+      _id: newCard._id,
+      cardOwner: req.user._id
+    }, function (err, flashCardData) {
         if(err){
             res.send("can't find flash card");
 
@@ -93,6 +99,7 @@ router.post('/update/', auth, function(req, res, next){
             flashCardData.hint = newCard.hint;
             flashCardData.answer = newCard.answer;
             flashCardData.more = newCard.more;
+            flashCardData.cardOwner =  req.user._id;
 
             console.log(flashCardData);
 
@@ -113,7 +120,10 @@ router.get('/delete', function(request, response, next){
 
 router.delete('/delete/:id', auth, function(req, res){
     console.log("delete the cards.")
-    flashCardsModel.find({_id: req.params.id},function(err,fcard){
+    flashCardsModel.find({
+      _id: req.params.id,
+      cardOwner: req.user._id
+    }, function(err,fcard){
         if(err){
             res.send("Error 1");
         }
@@ -130,6 +140,7 @@ router.delete('/delete/:id', auth, function(req, res){
 router.post('/register', function(req, res) {
     console.log('Register');
     console.log(req.body);
+
     Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
         if (err) {
             return res.render('register', { account : account });
@@ -150,13 +161,11 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 router.post('/logout', function(req, res) {
     req.logOut();
-    res.send(200);
+    res.sendStatus(200);
 });
 
 router.get('/loggedin', function(req, res){
-    console.log('session Check')
-    console.log(req)
-    console.log(res)
+    console.log('session Check');
     res.send(req.isAuthenticated() ? req.user : '0');
 });
 
