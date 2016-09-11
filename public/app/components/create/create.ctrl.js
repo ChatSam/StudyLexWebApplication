@@ -17,6 +17,9 @@
 		more:""
 	}
 
+  $scope.editState = !!$stateParams.id;
+  console.log($stateParams.id);
+
 	$scope.card="";
 
 	$scope.deletePost = function(id) {
@@ -71,21 +74,31 @@
 	}
 
 	$scope.updatePost = function(){
-			console.log($scope.newpost);
-			console.log($scope.newPost);
-
 			$http.post("/flashcards/update/", $scope.newpost)
 				.success(function(data){
-					$scope.getBlogPosts();
+					$state.go('cards');
 					console.log("post success")
-
-					//updateButton.toggle();
-					//mainButton.toggle();
 				})
 				.error(function(){
 					console.log("Cannot save flashcard.");
 				});
 	}
+
+  $scope.getCard = function(id){
+      $http.get("/flashcards/" + id)
+        .success(function(data){
+          console.log(data);
+          $scope.newpost = data[0];
+          console.log("post success");
+        })
+        .error(function(){
+          console.log("Cannot save flashcard.");
+        });
+  }
+
+  if($scope.editState){
+    $scope.getCard($stateParams.id);
+  }
 
   // $scope.checkSession();
 
