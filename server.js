@@ -7,7 +7,9 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
-mongoose.connect('mongodb://13.66.58.64:27017/flashCardDB');
+
+// mongoose.connect('mongodb://13.66.58.64:27017/flashCardDB');
+mongoose.connect('mongodb://localhost:27017/flashCardDB');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,8 +23,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var cardRoutes = require('./routes/flashcards');
-// Import my cards routes into the path '/flashcards'
+var instructionRoutes = require('./routes/instructions');
+// Import routes
 app.use('/flashcards', cardRoutes);
+app.use('/instructions', instructionRoutes);
 
 // passport config
 var Account = require('./models/account');

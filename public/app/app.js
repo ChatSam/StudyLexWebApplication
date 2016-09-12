@@ -19,10 +19,15 @@ angular.module('myApp', [
                 templateUrl: "./app/components/login/login.html",
                 controller: 'LoginCtrl'
             })
-            .state("cards", {
-              url: "/cards",
-              templateUrl: './app/components/cards/flcards.html',
-              controller: 'CardsCtrl'
+            .state("skills", {
+              url: "/skills",
+              templateUrl: './app/components/skill/skill.html',
+              controller: 'SkillCtrl'
+            })
+            .state("skill", {
+              url: "/skill/:type",
+              templateUrl: './app/components/skill/skill.html',
+              controller: 'SkillCtrl'
             })
             .state("create", {
               url: "/create",
@@ -30,7 +35,7 @@ angular.module('myApp', [
               controller: 'CreateCtrl'
             })
             .state("edit", {
-              url: "/edit/:id",
+              url: "/edit/:type/:id",
               templateUrl: './app/components/create/create.html',
               controller: 'CreateCtrl'
             })
