@@ -90,15 +90,12 @@ router.post('/update/', auth, function(req, res, next){
             res.send("can't find flash card");
 
         }else{
-            console.log(newCard.question);
             flashCardData.subject = newCard.subject;
             flashCardData.question = newCard.question;
             flashCardData.hint = newCard.hint;
             flashCardData.answer = newCard.answer;
             flashCardData.more = newCard.more;
             flashCardData.cardOwner =  req.user._id;
-
-            console.log(flashCardData);
 
             flashCardData.save(function(err,data){
                 if(err){

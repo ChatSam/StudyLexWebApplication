@@ -46,8 +46,6 @@
   border-radius: 0px;
   height: 180px;
   padding-top: 2%;
-
-
 }
 
 
@@ -61,10 +59,6 @@
 
 .jumbotron-card h3{
   color:white;
-}
-
-.btn{
-  border-radius: 0px;
 }
 
 .alexa-pane{
@@ -115,12 +109,6 @@
   background-image: url("../home/logo1.png");
 }
 
-.panel , .panel-heading{
-  border-radius: 0px;
-  padding-right: 0px;
-  padding-left: 0px;
-}
-
 .form-control{
   border-radius: 0px;
 }
@@ -153,11 +141,57 @@ td {
 
 }
 
-.hand-text{
-  font-family: "Comic Sans MS" ;
+.navbar-default {
+  color: whitesmoke;
+  background-color: rgb(56, 156, 236);
+  border-radius: 0;
+  border: none;
+  margin: 0;
 }
 
-.warning{
-  color: #a94442;
-  background-color: #f2dede;
+.navbar-default .navbar-nav>li>a {
+  color: #dff9fe;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: rgb(56, 156, 236) !important;
+  background-color: #dff9fe !important;
+}
+
+.navbar-brand>img {
+  width: 65%;
+}
+
+.navbar-default .navbar-brand {
+  margin: 0;
+  padding: 0;
+}
+
+.hand-text{
+  font-family: "Verdana,sans-serif" ;
+}
+
+.container.skill td.hand-text{
+  vertical-align: middle;
+}
+
+.container.skill td.hand-text.title{
+  font-weight: bold;
+}
+
+table .action {
+  padding-right: 0px
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    width: 100%;
+  }
+
+.panel-cntr {
+  max-width: 700px;
+  text-align: center;
+}
+
+.panel-cntr h2 {
+  color: #2c83c8;
 }
