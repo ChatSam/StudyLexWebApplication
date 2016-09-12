@@ -7,8 +7,8 @@ router = express.Router(),
 path = require('path'),
 flashCardsModel = require('../models/flashCardsModel'),
 passport = require('passport'),
-Account = require('../models/account');
-
+Account = require('../models/account'),
+mailingList = require('../models/mailingList');
 
 var auth = function(req, res, next){
   !req.isAuthenticated() ? res.send(401) : next();
@@ -133,6 +133,29 @@ router.delete('/delete/:id', auth, function(req, res){
         res.send("Deleted")
     });
 })
+
+
+//route to save email adresses
+router.post('/savemail', function(req,res){
+    var mailObj = req.body;
+    var mailingListModel = new mailingList(mailObj);
+
+    mailingListModel.save(function(err,data){
+
+        var duplicateEmailCode = 11000;
+
+        if(err){
+            if(err.code == duplicateEmailCode){
+                res.send("Email already saved.");
+            }else{
+                res.send(err);
+            }
+        }
+        else{
+            res.json(data);
+        }
+    });
+});
 
 router.post('/register', function(req, res) {
     console.log('Register');

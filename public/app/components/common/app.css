@@ -157,4 +157,7 @@ td {
   font-family: "Comic Sans MS" ;
 }
 
-
+.warning{
+  color: #a94442;
+  background-color: #f2dede;
+}
