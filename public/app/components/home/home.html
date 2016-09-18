@@ -132,7 +132,7 @@
         <p>Subscribe to receive updates!</p>
 
         <form name="emailForm" class="form-inline" form ="emailList" id="emailForm">
-            <input type="email" class="form-control" ng-class ='{warning:emailForm.address.$error.email}' name="address"
+            <input type="email" class="form-control" ng-class ="{'alert-danger':emailForm.address.$error.email}" name="address"
                    ng-model="emailList.mailAddress" size="50" style="border-radius: 0px" placeholder="Email Address" required>
             <button ng-click="submitEmail(this)" type="button" class="btn btn-info">Subscribe</button>
         </form>
