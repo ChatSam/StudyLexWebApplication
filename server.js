@@ -8,7 +8,7 @@ var express = require('express'),
     LocalStrategy = require('passport-local').Strategy;
 
 
-mongoose.connect('mongodb://13.66.58.64:27017/flashCardDB');
+mongoose.connect('mongodb://mongodev:mongoDevElev893@13.66.58.64:27017/flashCardDB');
 // mongoose.connect('mongodb://localhost:27017/flashCardDB');
 
 app.use(bodyParser.json());
