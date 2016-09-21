@@ -1,107 +1,87 @@
 <div id='Container' ng-controller="SkillCtrl" class="container skill">
-	<div class="center-block" ng-if='chooseSkill'>
-		<h2>Skills</h2>
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg" ng-click='viewSetSkill()'>Instruction Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>An instruction Skill is made up a set of steps and can be used to help someone assemble a product or bake a cake.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Learning Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>A Learning skill is made of questions and answers and can be used to learn a subject.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg"  ng-click='viewAnotherSkill()'>Other Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>Sed ut perspiciatis...</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div ng-if='viewCards'>
-		<h2>Subject Questions</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Subject</th>
-					<th>Question</th>
-					<th>Hint</th>
-					<th>Answer</th>
-					<th>More</th>
-					<th>Date</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="card in cardSet" >
-
-					<td class="hand-text title">{{card.subject}}</td>
-					<td class="hand-text">{{card.question}}</td>
-					<td class="hand-text">{{card.hint}}</td>
-					<td class="hand-text">{{card.answer}}</td>
-					<td class="hand-text"> {{card.more}}</td>
-					<td class="hand-text">{{card.time | date:'medium'}}</td>
-					<td class='action'>
-						<button type="button" ng-click="editCard(card._id)" class="btn btn-primary btn-block">Edit</button>
-						<button type="button" ng-click="deletePost(card._id)" class="btn btn-danger btn-block">Delete</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-	<div ng-if='viewInstruction'>
-		<h2>Instruction Steps</h2>
-		<table class="table">
-		<thead>
-			<tr>
-				<th>Manual</th>
-				<th>Step</th>
-				<th>Instruction</th>
-				<th>Help Level One</th>
-				<th>Help Level Two</th>
-				<th>Date</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="step in instructionSet" >
-
-				<td class="hand-text">{{step.manual}}</td>
-				<td class="hand-text">{{step.stepnumber}}</td>
-				<td class="hand-text">{{step.instruction}}</td>
-				<td class="hand-text">{{step.helplevelone}}</td>
-				<td class="hand-text"> {{step.helpleveltwo}}</td>
-				<td class="hand-text">{{step.time | date:'medium'}}</td>
-				<td>
-					<button type="button" ng-click="editStep(step._id)" class="btn btn-primary btn-block">Edit</button>
-					<button type="button" ng-click="deleteStep(step._id)" class="btn btn-danger btn-block">Delete</button>
-				</td>
-			</tr>
-		</tbody>
-		</table>
-	</div>
-
-	<div class="row" ng-if='!chooseSkill'>
-		<div class="col-sm-2">
-			<button type="button" class="btn" ng-click="selectSkill()">Select Different Skill</button>
-		</div>
-	</div>
+   <div class="center-block">
+      <h2>Skills</h2>
+      <div class="panel-group" id="accordion">
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" target="_self">
+                  Instruction Skills
+                  </a>
+               </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+               <div class="panel-body">
+                  <div class="well">
+                     <div class="row">
+                        <div class="col-sm-3">
+                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Make a Cake</button>
+                        </div>
+                        <div class="col-sm-9">
+                           <p>This skill tells you how to bake a cake</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="well">
+                     <div class="row">
+                        <div class="col-sm-3">
+                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Build Chair</button>
+                        </div>
+                        <div class="col-sm-9">
+                           <p>This skill tells you how to build your new chair</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" target="_self">
+                  Learning Skills
+                  </a>
+               </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+               <div class="panel-body">
+                  <div class="well">
+                     <div class="row">
+                        <div class="col-sm-3">
+                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Dragons</button>
+                        </div>
+                        <div class="col-sm-9">
+                           <p>This skill will teach you about dragons</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="well">
+                     <div class="row">
+                        <div class="col-sm-3">
+                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Presidents</button>
+                        </div>
+                        <div class="col-sm-9">
+                           <p>This skill will help you learn about the american Presidents</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="panel panel-default">
+            <div class="panel-heading">
+               <h4 class="panel-title">
+                  <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" target="_self">
+                  Other Skills
+                  </a>
+               </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+               <div class="panel-body">
+                  More to come...
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

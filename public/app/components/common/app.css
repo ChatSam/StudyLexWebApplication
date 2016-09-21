@@ -22,6 +22,11 @@
   margin: 0 2px;
 }
 
+.container.main {
+  min-height: 500px;
+  padding-top: 50px;
+}
+
 .spinner {
   text-align: center;
   display: table;
@@ -41,7 +46,7 @@
 
 
 .jumbotron-card{
-  background-color: rgba(56,156,236,1);
+  background-color: rgba(56, 156, 236, 0.75);
   margin: 2pt;
   border-radius: 0px;
   height: 180px;
@@ -88,14 +93,15 @@
 
 
 .steps-pane{
-  background-color:rgba(56,156,236,1);
+  background-color:rgba(56,156,236,0.75);
   color:white;
   padding-bottom: 2%;
 
 }
 
-.why-pane{
+.why-pane {
   color: rgb(47, 113, 183);
+  padding: 0 6%;
 }
 
 
@@ -197,3 +203,73 @@ table .action {
 .panel-cntr h2 {
   color: #2c83c8;
 }
+
+.panel-heading .accordion-toggle::before {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    float: left;
+    color: grey;
+}
+.panel-heading .accordion-toggle.collapsed::before {
+    content: "\e080";
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  display: block;
+  position: relative;
+  background-repeat: no-repeat;
+  height: 50px;
+  border-radius: 3px;
+  width: 50px;
+  right: 0;
+}
+
+.carousel-control.left {
+    background-image: none;
+    float: left;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+    background-repeat: repeat-x;
+}
+
+.carousel-control.right {
+    background-image: none;
+    float: right;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+    background-repeat: repeat-x;
+}
+
+.carousel-indicators li {
+  border: 1px solid #6fb7f1;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  text-indent: inherit;
+}
+
+.carousel-indicators .active {
+    width: 31px;
+    height: 31px;
+    color: #fff;
+    margin: 0;
+    background-color: #389cec;
+}
+
+.create .carousel-indicators {
+    bottom: 0;
+    line-height: 28px;
+}
+
+.create .panel {
+    margin-bottom: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+.carousel-controls {
+  overflow: hidden;
+}
+
+.glyphicon-chevron-right:before,
+.glyphicon-chevron-left:before{
+    color: #389cec;
+  }

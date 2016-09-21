@@ -10,8 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     </head>
 
-    <body>
-      <nav class="navbar navbar-default">
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+      <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -35,10 +35,37 @@
           </div>
         </div>
       </nav>
-      <div class="container">
+      <div class="container main">
           <div class="row">
               <div ui-view></div>
           </div>
+      </div>
+
+      <div class="container-fluid text-center">
+          <div class="row base">
+
+              <div class="col-md-4" >
+                  <br><img src="app/components/home/logo1.png">
+                  <br> - elev8 Incorporated -
+                  <br>Cincinnati, OH
+              </div>
+
+              <div class="col-md-8">
+                  <div class="row">
+                      <!--<p style="padding-top:2%">Subscribe to receive updates!</p>-->
+                      <!--<form class="form-inline">-->
+                          <!--<input type="email" class="form-control" size="50" style="border-radius: 0px" placeholder="Email Address" required>-->
+                          <!--<button type="button" class="btn btn-default">Subscribe</button>-->
+                      <!--</form>-->
+                  </div>
+
+                  <div class="row" style="padding-top: 2%">
+                      <h5>Questions, Comments, Concerns? Let us know at <br><br> elev8learningco@gmail.com </h5>
+                  </div>
+
+              </div>
+          </div>
+
       </div>
     </body>
 
@@ -55,8 +82,9 @@
         <script type="text/javascript" src="./node_modules/angular-ui-router/release/angular-ui-router.js"></script>
         <script type="text/javascript" src="./app/app.js"></script>
         <script type="text/javascript" src="./app/components/skill/skill.ctrl.js"></script>
-        <script type="text/javascript" src="./app/components/skilltype/skilltype.ctrl.js"></script>
+        <script type="text/javascript" src="./app/components/skill-view/skill-view.ctrl.js"></script>
         <script type="text/javascript" src="./app/components/create/create.ctrl.js"></script>
+        <script type="text/javascript" src="./app/components/create-view/create-view.ctrl.js"></script>
         <script type="text/javascript" src="./app/components/login/login.ctrl.js"></script>
         <script type="text/javascript" src="./app/components/logout/logout.ctrl.js"></script>
         <script type="text/javascript" src="./app/components/register/register.ctrl.js"></script>

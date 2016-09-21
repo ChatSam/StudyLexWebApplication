@@ -24,20 +24,25 @@ angular.module('myApp', [
               templateUrl: './app/components/skill/skill.html',
               controller: 'SkillCtrl'
             })
-            .state("skill", {
+            .state("skill-view", {
               url: "/skill/:type",
-              templateUrl: './app/components/skill/skill.html',
-              controller: 'SkillCtrl'
+              templateUrl: './app/components/skill-view/skill-view.html',
+              controller: 'SkillViewCtrl'
             })
             .state("create", {
               url: "/create",
               templateUrl: './app/components/create/create.html',
               controller: 'CreateCtrl'
             })
+            .state("create-view", {
+              url: "/create/:type",
+              templateUrl: './app/components/create-view/create-view.html',
+              controller: 'CreateViewCtrl'
+            })
             .state("edit", {
               url: "/edit/:type/:id",
-              templateUrl: './app/components/create/create.html',
-              controller: 'CreateCtrl'
+              templateUrl: './app/components/create-view/create-view.html',
+              controller: 'CreateViewCtrl'
             })
             .state("logout", {
                 url: "/logout",

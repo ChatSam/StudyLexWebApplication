@@ -76,11 +76,6 @@ router.post('/create', auth, function(req, res){
     });
 })
 
-/* load update flashcards view*/
-router.get('/update',function (request, response, next){
-
-})
-
 router.post('/update/', auth, function(req, res, next){
     console.log("update the cards.");
     console.log(passport);
@@ -131,36 +126,19 @@ router.delete('/delete/:id', auth, function(req, res){
     });
 })
 
-router.post('/register', function(req, res) {
-    console.log('Register');
-    console.log(req.body);
+/* load update flashcards view*/
+router.get('/export/:id', auth, function (request, response, next){
 
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            return res.render('register', { account : account });
-        }
-        console.log('Registered this');
-        passport.authenticate('local')(req, res, function () {
-          console.log('Registered now try to redirect.');
+      flashCardsModel.find({
+        subject: req.params.subject,
+        cardOwner: req.user._id
+      },function(err,fcard){
+          if(err) {
+              res.send("No such subject");
+          }
+          res.send(fcard);
+      });
 
-          res.send({redirect: 'home'});
-
-        });
-    });
-});
-
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.send(req.user);
-});
-
-router.post('/logout', function(req, res) {
-    req.logOut();
-    res.sendStatus(200);
-});
-
-router.get('/loggedin', function(req, res){
-    console.log('session Check');
-    res.send(req.isAuthenticated() ? req.user : '0');
-});
+})
 
 module.exports = router;

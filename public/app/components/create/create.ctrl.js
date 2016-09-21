@@ -12,37 +12,13 @@
   $scope.createLearningSkill = createLearningSkill;
   $scope.createAnotherSkill = createAnotherSkill;
   $scope.selectSkill = selectSkill;
-	$scope.newCard = {
-		time: "",
-		subject:"",
-		question:"",
-		hint:"",
-		answer:"",
-		more:""
-	}
-  $scope.newInstruction = {
-    manual: "",
-    stepnumber: "",
-    instruction: "",
-    helplevelone: "",
-    helpleveltwo: ""
-  }
-
-  $scope.editState = !!$stateParams.id;
-
-  $scope.editState = !!$stateParams.type;
-  console.log($stateParams.id);
-
-	$scope.card="";
 
 function createInstructionSkill() {
-  $scope.chooseCreationSkill = false;
-  $scope.createInstruction = true;
+  $state.go('create-view', { type: 'instruction'});
 }
 
 function createLearningSkill() {
-  $scope.chooseCreationSkill = false;
-  $scope.createLearning = true;
+  $state.go('create-view', { type: 'learning'});
 }
 
 function createAnotherSkill() {
@@ -54,33 +30,6 @@ function selectSkill() {
   $scope.createInstruction = false;
   $scope.createLearning = false;
 }
-
-	$scope.deleteCard = function(id) {
-
-		$http.delete(
-			"/flashcards/delete/"+id
-			).then(
-			function success(){
-				$scope.getBlogPosts()
-			},
-			function error(){
-				console.log("Error. Cannot delete flashcard")
-			});
-	};
-
-	$scope.submitCard = function(form) {
-		var now = new Date().getTime();
-		var thisCard = $scope.newCard;
-    thisCard.time = now;
-
-		$http.post("/flashcards/create", thisCard)
-			.success(function(data){
-        $state.go('skill', { type: 'learning'});
-			})
-			.error(function(){
-        console.log("Cannot save flashcard.")
-			});
-	};
 
   $scope.submitInstruction = function(form) {
     var now = new Date().getTime();
@@ -142,22 +91,22 @@ function selectSkill() {
         });
   }
 
-  if($scope.editState){
-    switch($stateParams.type) {
-      case 'instruction': {
-        $scope.chooseCreationSkill = false;
-        $scope.createInstruction = true;
-        $scope.getInstruction($stateParams.id);
-        break;
-      }
-      default: {
-        $scope.chooseCreationSkill = false;
-        $scope.createLearning = true;
-        $scope.getCard($stateParams.id);
-      }
-    }
-
-  }
+  // if($scope.editState){
+  //   switch($stateParams.type) {
+  //     case 'instruction': {
+  //       $scope.chooseCreationSkill = false;
+  //       $scope.createInstruction = true;
+  //       $scope.getInstruction($stateParams.id);
+  //       break;
+  //     }
+  //     default: {
+  //       $scope.chooseCreationSkill = false;
+  //       $scope.createLearning = true;
+  //       $scope.getCard($stateParams.id);
+  //     }
+  //   }
+  //
+  // }
 }
 
 })();

@@ -56,13 +56,13 @@ router.get('/manual/:task', auth, function (req, res, next){
 router.post('/create', auth, function(req, res){
     console.log("create the instruction.")
     // console.log(req, res, req.body, res.body);
-    var newInstruction = req.body;
+    var newInstructionApp = req.body;
 
-    var instruction = new instructionModel(newInstruction);
+    var instructionApp = new instructionModel(newInstructionApp);
 
-    instruction.instructionOwner = req.user._id;
+    instructionApp.instructionAppOwner = req.user._id;
 
-    instruction.save(function(err,data){
+    instructionApp.save(function(err,data){
         if(err){
             res.send("Error ");
         }
@@ -110,6 +110,11 @@ router.delete('/delete/:id', auth, function(req, res){
 
         res.send("Deleted")
     });
+})
+
+/* load update flashcards view*/
+router.get('/export/:id', auth, function (request, response, next){
+
 })
 
 
