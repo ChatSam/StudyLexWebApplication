@@ -8,38 +8,50 @@
 
 	console.log("SkillCtrl");
 
-	$scope.cardSet = [];
+	$scope.skill = {};
   $scope.chooseSkill = true;
 	$scope.viewCards = false;
 	$scope.viewInstruction = false;
-  $scope.selectSkill = selectSkill;
-  $scope.viewSetSkill = viewSetSkill;
+  $scope.viewInstructionSkill = viewInstructionSkill;
   $scope.viewLearningSkill = viewLearningSkill;
-  $scope.viewAnotherSkill = viewAnotherSkill;
+
+  getInstructionList();
+  getLearningList();
 
   $scope.typeState = !!$stateParams.type;
 
 	$scope.model="";
 
-  function viewSetSkill(){
-    $scope.chooseSkill = false;
-    $scope.viewInstruction = true;
+  function viewInstructionSkill(_id) {
+    $state.go('skill', { type: 'instruction', id: _id});
   }
 
-  function viewLearningSkill(){
-    $scope.chooseSkill = false;
-    $scope.viewCards = true;
+  function viewLearningSkill(_id) {
+    $state.go('skill', { type: 'learning', id: _id});
   }
 
-  function viewAnotherSkill(){
-    $scope.chooseSkill = false;
+  function getInstructionList() {
+    $http.get("/instructions").
+      success(function(data){
+        console.log(data);
+        $scope.skill.instructions = data;
+      })
+      .error(function(){
+        console.log("Cannot pull instruction skills.");
+      });
   }
 
-  function selectSkill() {
-    $scope.chooseSkill = true;
-  	$scope.viewCards = false;
-  	$scope.viewInstruction = false;
+  function getLearningList() {
+    $http.get("/flashcards").
+      success(function(data){
+        console.log(data);
+        $scope.skill.sets = data;
+      })
+      .error(function(){
+        console.log("Cannot pull instruction skills.");
+      });
   }
+
 }
 
 })();

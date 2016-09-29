@@ -1,99 +1,50 @@
 <div id='Container' ng-controller="SkillCtrl" class="container skill">
-	<div class="center-block" ng-if='chooseSkill'>
-		<h2>Skills</h2>
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg" ng-click='viewSetSkill()'>Instruction Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>An instruction Skill is made up a set of steps and can be used to help someone assemble a product or bake a cake.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Learning Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>A Learning skill is made of questions and answers and can be used to learn a subject.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="well">
-			<div class="row">
-				<div class="col-sm-3">
-					<button type="button" class="btn btn-primary btn-lg"  ng-click='viewAnotherSkill()'>Other Skills</button>
-				</div>
-				<div class="col-sm-9">
-					<p>Sed ut perspiciatis...</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div ng-if='viewCards'>
-		<h2>Subject Questions</h2>
+	<div ng-if="typeOfLearning">
+		<h2>{{learningApp.appName}}</h2>
+		<h3>{{learningApp.subject}}</h3>
+		<h3>{{learningApp.appDescription}}</h3>
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Subject</th>
 					<th>Question</th>
 					<th>Hint</th>
 					<th>Answer</th>
 					<th>More</th>
 					<th>Date</th>
-					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="card in cardSet" >
-
-					<td class="hand-text title">{{card.subject}}</td>
+				<tr ng-repeat="card in learningApp.cards" >
 					<td class="hand-text">{{card.question}}</td>
 					<td class="hand-text">{{card.hint}}</td>
 					<td class="hand-text">{{card.answer}}</td>
 					<td class="hand-text"> {{card.more}}</td>
 					<td class="hand-text">{{card.time | date:'medium'}}</td>
-					<td class='action'>
-						<button type="button" ng-click="editCard(card._id)" class="btn btn-primary btn-block">Edit</button>
-						<button type="button" ng-click="deletePost(card._id)" class="btn btn-danger btn-block">Delete</button>
-					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<div ng-if='viewInstruction'>
-		<h2>Instruction Steps</h2>
+	<div ng-if="typeOfInstruction">
+		<h2>{{instructionApp.appName}}</h2>
+		<h3>{{instructionApp.appDescription}}</h3>
 		<table class="table">
 		<thead>
 			<tr>
-				<th>Manual</th>
 				<th>Step</th>
 				<th>Instruction</th>
 				<th>Help Level One</th>
 				<th>Help Level Two</th>
 				<th>Date</th>
-				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="step in instructionSet" >
-
-				<td class="hand-text">{{step.manual}}</td>
+			<tr ng-repeat="step in instructionApp.steps" >
 				<td class="hand-text">{{step.stepnumber}}</td>
 				<td class="hand-text">{{step.instruction}}</td>
-				<td class="hand-text">{{step.helplevelone}}</td>
-				<td class="hand-text"> {{step.helpleveltwo}}</td>
-				<td class="hand-text">{{step.time | date:'medium'}}</td>
-				<td>
-					<button type="button" ng-click="editStep(step._id)" class="btn btn-primary btn-block">Edit</button>
-					<button type="button" ng-click="deleteStep(step._id)" class="btn btn-danger btn-block">Delete</button>
-				</td>
+				<td class="hand-text">{{step.help[0]}}</td>
+				<td class="hand-text">{{step.help[1]}}</td>
+				<td class="hand-text">{{instructionApp.date | date:'medium'}}</td>
 			</tr>
 		</tbody>
 		</table>

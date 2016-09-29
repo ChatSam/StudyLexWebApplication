@@ -6,97 +6,42 @@
   SkillViewCtrl.$inject = ['$scope', '$http', '$stateParams', '$state', '$rootScope'];
   function SkillViewCtrl ($scope, $http, $stateParams, $state, $rootScope) {
 
-	console.log("SkillCtrl");
+	console.log("SkillViewCtrl");
 
 	$scope.cardSet = [];
-  $scope.chooseSkill = true;
-	$scope.viewCards = false;
-	$scope.viewInstruction = false;
-  $scope.selectSkill = selectSkill;
-  $scope.viewSetSkill = viewSetSkill;
-  $scope.viewLearningSkill = viewLearningSkill;
-  $scope.viewAnotherSkill = viewAnotherSkill;
-  $scope.addInstruction = addInstruction;
 
-	$scope.newCardPost= {
-		time: "",
-		subject:"",
-		question:"",
-		hint:"",
-		answer:"",
-		more:""
-	}
+  $scope.typeOfInstruction = $stateParams.type === 'instruction';
+  $scope.typeOfLearning = $stateParams.type === 'learning';
 
-  $scope.newStep = {
-    stepnumber: '',
-    instruction: '',
-    helplevelone: '',
-    helpleveltwo: ''
+  if ($scope.typeOfInstruction) {
+    getInstruction($stateParams.id);
+  } else if ($scope.typeOfLearning) {
+    getLearning($stateParams.id);
   }
 
-  $scope.newInstruction = {
-    time: "",
-    manual:"",
-    appDescription: "",
-    steps: [
-      $scope.newStep,
-      $scope.newStep
-    ]
-  }
-
-  $scope.typeState = !!$stateParams.type;
-
-	$scope.model="";
-
-  function addInstruction() {
-    $scope.newInstructionPost.steps.push($scope.newInstructionPost);
-  }
-
-  function viewSetSkill(){
-    $scope.getInstruction();
-    $scope.chooseSkill = false;
-    $scope.viewInstruction = true;
-  }
-
-  function viewLearningSkill(){
-    $scope.getCards();
-    $scope.chooseSkill = false;
-    $scope.viewCards = true;
-  }
-
-  function viewAnotherSkill(){
-    $scope.chooseSkill = false;
-  }
-
-  function selectSkill() {
-    $scope.chooseSkill = true;
-  	$scope.viewCards = false;
-  	$scope.viewInstruction = false;
-  }
-
-	$scope.getInstruction = function() {
-
-		$http.get("/instructions/steps").then(function(result){
-			$scope.instructionSet = result.data;
-		}, function () {
-      $scope.cardSet = [];
-      $rootScope.state = false;
-      $state.go('login');
-
-    });
+	function getInstruction(id) {
+    $http.get("/instructions/" + id).
+      success(function(data){
+        console.log(data);
+        $scope.instructionApp = data[0];
+      })
+      .error(function(){
+        console.log("Cannot pull instruction skills.");
+      });
 	};
 
-  $scope.getCards = function() {
-
-		$http.get("/flashcards/cards").then(function(result){
-			$scope.cardSet = result.data;
-		}, function () {
-      $scope.cardSet = [];
+  function getLearning(id) {
+    $http.get("/flashcards/" + id)
+      .success(function(data){
+        console.log(data);
+        $scope.learningApp = data[0];
+      })
+    .error(function(){
+      $scope.learningApp = [];
       $rootScope.state = false;
       $state.go('login');
-
     });
-	};
+  }
 
 	$scope.deletePost = function(id) {
 
@@ -139,22 +84,6 @@
 
       });
   };
-
-  // if($scope.typeState){
-  //   switch ($stateParams.type) {
-  //     case 'instruction': {
-  //       $scope.chooseSkill = false;
-  //       $scope.viewInstruction = true;
-  //       $scope.getInstruction($stateParams.id);
-  //       break;
-  //     }
-  //     default: {
-  //       $scope.chooseSkill = false;
-  //       $scope.viewCards = true;
-  //       $scope.getCards($stateParams.id);
-  //     }
-  //   }
-  // }
 }
 
 })();

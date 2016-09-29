@@ -19,15 +19,15 @@ angular.module('myApp', [
                 templateUrl: "./app/components/login/login.html",
                 controller: 'LoginCtrl'
             })
+            .state("skill", {
+              url: "/skill/:type/:id",
+              templateUrl: './app/components/skill-view/skill-view.html',
+              controller: 'SkillViewCtrl'
+            })
             .state("skills", {
               url: "/skills",
               templateUrl: './app/components/skill/skill.html',
               controller: 'SkillCtrl'
-            })
-            .state("skill-view", {
-              url: "/skill/:type",
-              templateUrl: './app/components/skill-view/skill-view.html',
-              controller: 'SkillViewCtrl'
             })
             .state("create", {
               url: "/create",
@@ -59,14 +59,14 @@ angular.module('myApp', [
 // Debugging ui-router
 .run(['$rootScope', function($rootScope) {
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
-        console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+        console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n',toState, toParams);
     });
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
         console.log('$stateChangeError - fired when an error occurs during transition.');
         console.log(arguments);
     });
     $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
-        console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+        console.log('$stateChangeSuccess to ' + toState.name + '- fired once the state transition is complete.');
     });
     // $rootScope.$on('$viewContentLoading',function(event, viewConfig){
     //   // runs on individual scopes, so putting it in "run" doesn't work.
@@ -76,7 +76,7 @@ angular.module('myApp', [
         console.log('$viewContentLoaded - fired after dom rendered',event);
     });
     $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
-        console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
+        console.log('$stateNotFound ' + unfoundState.to + '   - fired when a state cannot be found by its name.');
         console.log(unfoundState, fromState, fromParams);
     });
 }]);

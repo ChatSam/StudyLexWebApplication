@@ -5,7 +5,7 @@ var express = require('express'),
 mongoose = require('mongoose'),
 router = express.Router(),
 path = require('path'),
-flashCardsModel = require('../models/flashCardsModel'),
+FlashCardsModel = require('../models/flashCardsModel'),
 passport = require('passport'),
 Account = require('../models/account');
 
@@ -16,24 +16,39 @@ var auth = function(req, res, next){
 
 
 /* list all the flashcards */
-router.get('/cards', auth, function (req, res) {
-    console.log("pulling the cards.");
-    console.log(passport);
+// router.get('/', auth, function (req, res) {
+//     console.log("pulling the cards.");
+//     console.log(passport);
+//
+//     FlashCardsModel.find({cardOwner: req.user._id},function(err,fcard){
+//         if(err){
+//             res.send(err.message);
+//         }
+//         res.send(fcard);
+//     });
+// });
 
-    flashCardsModel.find({cardOwner: req.user._id},function(err,fcard){
-        if(err){
-            res.send(err.message);
+/* sort get instruction by appName */
+router.get('/', auth, function (req, res) {
+    FlashCardsModel.
+      find({learningAppOwner: req.user._id}).
+      limit(10).
+      select('appName _id appDescription').
+      exec(function (err, list) {
+        console.log(err);
+        console.log(list);
+        if (err) {
+            res.send("No such subject");
         }
-        res.send(fcard);
+        res.json(list);
     });
-});
+})
 
 /* get a specific flashcard by id*/
 router.get('/:id', auth, function (req, res){
-
-    flashCardsModel.find({
+    FlashCardsModel.find({
       _id: req.params.id,
-      cardOwner: req.user._id
+      learningAppOwner: req.user._id
     },function(err,fcard){
         if(err){
             res.send("Invalid flashcard");
@@ -45,7 +60,7 @@ router.get('/:id', auth, function (req, res){
 /* sort flashcards by subjects */
 router.get('/subject/:subject', auth, function (req, res, next){
 
-    flashCardsModel.find({
+    FlashCardsModel.find({
       subject: req.params.subject,
       cardOwner: req.user._id
     },function(err,fcard){
@@ -56,17 +71,12 @@ router.get('/subject/:subject', auth, function (req, res, next){
     });
 })
 
-/* load create flashcards view */
-router.get('/create',function(request, response, next){
-
-})
-
-router.post('/create', auth, function(req, res){
+router.post('/', auth, function(req, res){
     var newCard = req.body;
     console.log(newCard);
-    var flashCard = new flashCardsModel(newCard);
+    var flashCard = new FlashCardsModel(newCard);
 
-    flashCard.cardOwner = req.user._id;
+    flashCard.learningAppOwner = req.user._id;
     flashCard.save(function(err,data){
         if(err){
             res.send("Error ");
@@ -76,11 +86,11 @@ router.post('/create', auth, function(req, res){
     });
 })
 
-router.post('/update/', auth, function(req, res, next){
+router.put('/', auth, function(req, res, next){
     console.log("update the cards.");
     console.log(passport);
     var newCard = req.body;
-    flashCardsModel.findById(newCard._id, function (err, flashCardData) {
+    FlashCardsModel.findById(newCard._id, function (err, flashCardData) {
         if(err){
             res.send("can't find flash card");
 
@@ -102,14 +112,9 @@ router.post('/update/', auth, function(req, res, next){
     });
 })
 
-/* load delete flashcards view*/
-router.get('/delete', function(request, response, next){
-
-})
-
 router.delete('/delete/:id', auth, function(req, res){
     console.log("delete the cards.")
-    flashCardsModel.find({
+    FlashCardsModel.find({
       _id: req.params.id,
       cardOwner: req.user._id
     }, function(err,fcard){
@@ -129,7 +134,7 @@ router.delete('/delete/:id', auth, function(req, res){
 /* load update flashcards view*/
 router.get('/export/:id', auth, function (request, response, next){
 
-      flashCardsModel.find({
+      FlashCardsModel.find({
         subject: req.params.subject,
         cardOwner: req.user._id
       },function(err,fcard){

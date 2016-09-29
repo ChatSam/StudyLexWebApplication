@@ -12,23 +12,13 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse">
                <div class="panel-body">
-                  <div class="well">
+                  <div class="well" ng-repeat="instApp in skill.instructions track by $index">
                      <div class="row">
                         <div class="col-sm-3">
-                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Make a Cake</button>
+                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewInstructionSkill(instApp._id)'>{{instApp.appName}}</button>
                         </div>
                         <div class="col-sm-9">
-                           <p>This skill tells you how to bake a cake</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="well">
-                     <div class="row">
-                        <div class="col-sm-3">
-                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Build Chair</button>
-                        </div>
-                        <div class="col-sm-9">
-                           <p>This skill tells you how to build your new chair</p>
+                           <p>{{instApp.appDescription}}</p>
                         </div>
                      </div>
                   </div>
@@ -45,26 +35,16 @@
             </div>
             <div id="collapseTwo" class="panel-collapse collapse">
                <div class="panel-body">
-                  <div class="well">
-                     <div class="row">
-                        <div class="col-sm-3">
-                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Dragons</button>
-                        </div>
-                        <div class="col-sm-9">
-                           <p>This skill will teach you about dragons</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="well">
-                     <div class="row">
-                        <div class="col-sm-3">
-                           <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill()'>Presidents</button>
-                        </div>
-                        <div class="col-sm-9">
-                           <p>This skill will help you learn about the american Presidents</p>
-                        </div>
-                     </div>
-                  </div>
+                 <div class="well" ng-repeat="learningApp in skill.sets track by $index">
+                    <div class="row">
+                       <div class="col-sm-3">
+                          <button type="button" class="btn btn-primary btn-lg" ng-click='viewLearningSkill(learningApp._id)'>{{learningApp.appName}}</button>
+                       </div>
+                       <div class="col-sm-9">
+                          <p>{{learningApp.appDescription}}</p>
+                       </div>
+                    </div>
+                 </div>
                </div>
             </div>
          </div>

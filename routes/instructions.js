@@ -5,7 +5,7 @@ var express = require('express'),
 mongoose = require('mongoose'),
 router = express.Router(),
 path = require('path'),
-instructionModel = require('../models/instructionModel'),
+InstructionModel = require('../models/instructionModel'),
 passport = require('passport'),
 Account = require('../models/account');
 
@@ -20,7 +20,7 @@ router.get('/steps', function (req, res) {
     console.log("pulling the cards.");
     console.log(passport);
     passport.authenticate('local')
-    instructionModel.find({instructionOwner: req.user._id}, function(err,steps){
+    InstructionModel.find({instructionOwner: req.user._id}, function(err,steps){
         if(err){
             res.send(err.message);
         }
@@ -30,43 +30,42 @@ router.get('/steps', function (req, res) {
 
 /* get a specific flashcard by id*/
 router.get('/:id', auth, function (req, res){
-
-    instructionModel.find({
-      _id: req.params.id,
-      instructionOwner: req.user._id
-    },function(err,fcard){
+    console.log(req.params.id);
+    InstructionModel.find({
+      _id: req.params.id
+    }, function(err, instruction){
         if(err){
-            res.send("Invalid flashcard");
+            res.send("Invalid instruction");
         }
-        res.send(fcard);
+        res.send(instruction);
     });
 })
 
-/* sort flashcards by subjects */
-router.get('/manual/:task', auth, function (req, res, next){
-
-    instructionModel.find({subject: req.params.subject},function(err,fcard){
+/* sort get instruction by appName */
+router.get('/', auth, function (req, res){
+    InstructionModel.
+      find({instructionAppOwner: req.user._id}).
+      limit(10).
+      select('appName _id appDescription').
+      exec(function(err,instructionList){
+        console.log(err);
+        console.log(instructionList);
         if(err) {
             res.send("No such subject");
         }
-        res.send(fcard);
+        res.json(instructionList);
     });
 })
 
-router.post('/create', auth, function(req, res){
-    console.log("create the instruction.")
-    // console.log(req, res, req.body, res.body);
+router.post('/', auth, function(req, res){
     var newInstructionApp = req.body;
-
-    var instructionApp = new instructionModel(newInstructionApp);
-
+    var instructionApp = new InstructionModel(newInstructionApp);
     instructionApp.instructionAppOwner = req.user._id;
-
     instructionApp.save(function(err,data){
         if(err){
             res.send("Error ");
         }
-        res.json(data);
+        res.json(data.appName);
 
     });
 })
@@ -75,7 +74,8 @@ router.post('/update/', auth, function(req, res, next){
     console.log("update the instruction.");
     console.log(passport);
     var newInstruction = req.body;
-    instructionModel.findById(newInstruction._id,function (err, instructionData) {
+    InstructionModel.findById(newInstruction._id,
+      function (err, instructionData) {
         if(err){
             res.send("can't find flash card");
 
@@ -98,7 +98,7 @@ router.post('/update/', auth, function(req, res, next){
 
 router.delete('/delete/:id', auth, function(req, res){
     console.log("delete the cards.")
-    instructionModel.find({_id: req.params.id},function(err,instruction){
+    InstructionModel.find({_id: req.params.id},function(err,instruction){
         if(err){
             res.send("Error 1");
         }

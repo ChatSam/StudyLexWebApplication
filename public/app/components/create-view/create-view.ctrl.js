@@ -5,24 +5,9 @@
   CreateViewCtrl.$inject = ['$scope', '$http', '$stateParams', '$state', '$rootScope'];
   function CreateViewCtrl ($scope, $http, $stateParams, $state, $rootScope) {
 
-  $scope.chooseCreationSkill = true;
-  $scope.createInstruction = false;
-  $scope.createLearning = false;
-  $scope.createInstructionSkill = createInstructionSkill;
-  $scope.createLearningSkill = createLearningSkill;
-  $scope.createAnotherSkill = createAnotherSkill;
-  $scope.selectSkill = selectSkill;
-  $scope.addInstruction = addInstruction;
-  $scope.submitInstructionApp = submitInstructionApp;
+  $scope.addItem = addItem;
+  $scope.submitApp = submitApp;
 
-	$scope.newCard = {
-		time: "",
-		subject:"",
-		question:"",
-		hint:"",
-		answer:"",
-		more:""
-	}
   $scope.newStep = {
     stepnumber: 1,
     instruction: '',
@@ -39,42 +24,42 @@
     ]
   }
 
-  function addInstruction() {
-    var temp = angular.copy($scope.newStep);
-    temp.stepnumber = $scope.newInstructionApp.steps.length + 1;
-    $scope.newInstructionApp.steps.push(temp);
-    console.log($scope.newInstructionApp)
+  $scope.newCard = {
+    question:"",
+    hint:"",
+    answer:"",
+    more:""
+  }
+  // hint
+
+  $scope.newLearningApp = {
+    date: "",
+    appName:"",
+    appDescription: "",
+    subject:"",
+    cards: [
+      angular.copy($scope.newCard)
+    ]
   }
 
   $scope.editState = !!$stateParams.id;
-
-  $scope.editState = !!$stateParams.type;
-  console.log($stateParams.id);
-
+  $scope.typeOfInstruction = $stateParams.type === 'instruction';
+  $scope.typeOfLearning = $stateParams.type === 'learning';
 	$scope.card="";
 
-function createInstructionSkill() {
-  $scope.chooseCreationSkill = false;
-  $scope.createInstruction = true;
-}
-
-function createLearningSkill() {
-  $scope.chooseCreationSkill = false;
-  $scope.createLearning = true;
-}
-
-function createAnotherSkill() {
-  $scope.chooseCreationSkill = false;
-}
-
-function selectSkill() {
-  $scope.chooseCreationSkill = true;
-  $scope.createInstruction = false;
-  $scope.createLearning = false;
-}
+  function addItem() {
+    var temp;
+    if ($scope.typeOfInstruction) {
+      temp = angular.copy($scope.newStep);
+      temp.stepnumber = $scope.newInstructionApp.steps.length + 1;
+      $scope.newInstructionApp.steps.push(temp);
+    } else if ($scope.typeOfLearning) {
+      temp = angular.copy($scope.newCard);
+      $scope.newLearningApp.cards.push(temp);
+    }
+  }
 
 	function deleteRemoveCard(id) {
-
 		$http.delete(
 			"/flashcards/delete/"+id
 			).then(
@@ -86,12 +71,28 @@ function selectSkill() {
 			});
 	};
 
+  function submitApp(form) {
+    if ($scope.typeOfInstruction) {
+      submitInstructionApp(form);
+    } else if ($scope.typeOfLearning) {
+      submitLearningApp(form);
+    }
+  }
+
   function submitLearningApp(form) {
 		var now = new Date().getTime();
-		var thisCard = $scope.newCard;
-    thisCard.time = now;
+		var thisApp = angular.copy($scope.newLearningApp);
+    thisApp.time = now;
 
-		$http.post("/flashcards/create", thisCard)
+    var l = thisApp.cards.length;
+
+    while(l--) {
+        thisApp.cards[l].hints = [];
+        thisApp.cards[l].hints.push(thisApp.cards[l].hint);
+        delete thisApp.cards[l].hint;
+    }
+
+		$http.post("/flashcards", thisApp)
 			.success(function(data) {
         $state.go('skill', { type: 'learning'});
 			})
@@ -102,10 +103,20 @@ function selectSkill() {
 
   function submitInstructionApp(form) {
     var now = new Date().getTime();
-    var thisInstruction = $scope.newInstructionApp;
-    thisInstruction.date = now;
+    var thisApp = angular.copy($scope.newInstructionApp);
+    thisApp.date = now;
 
-    $http.post("/instructions/create", thisInstruction)
+    var l = thisApp.steps.length;
+
+    while(l--) {
+        thisApp.steps[l].help = [];
+        thisApp.steps[l].help.push(thisApp.steps[l].helplevelone);
+        delete thisApp.steps[l].helplevelone;
+        thisApp.steps[l].help.push(angular.copy(thisApp.steps[l].helpleveltwo));
+        delete thisApp.steps[l].helpleveltwo;
+    }
+
+    $http.post("/instructions", thisApp)
       .success(function(data){
         $state.go('skill', { type: 'instruction'});
       })
