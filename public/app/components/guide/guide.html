@@ -1,16 +1,16 @@
 
-<div class="container guide">
+<div class="container guide col-sm-8 col-sm-offset-2">
     <h2 style="color: #1b5a98 "> Alexa Skills setup guide</h2>
-    <div>
-        <nav role ="navigation"></nav>
-        <ul>
-            <li>introduction</li>
-            <li>Glossary</li>
-            <li>setup outline</li>
-            <li>setting up AWS lambda skill</li>
-            <li>registering the Alexa skill</li>
-        </ul>
-    </div>
+    <!--<div>-->
+        <!--<nav role ="navigation"></nav>-->
+        <!--<ul>-->
+            <!--<li>introduction</li>-->
+            <!--<li>Glossary</li>-->
+            <!--<li>setup outline</li>-->
+            <!--<li>setting up AWS lambda skill</li>-->
+            <!--<li>registering the Alexa skill</li>-->
+        <!--</ul>-->
+    <!--</div>-->
 
     <hr>
 
@@ -20,53 +20,54 @@
         <h4 class="text-center">This guide does not provide guidelines to set up an Alexa Smart Home Skill</h4>
         </p>
         <br>
-        <div class="row">
-            <p class="col-md-8 col-md-offset-2">
+
+            <p>
                 There are several ways to configure Alexa skills. We at elev8 have curated a simplified step-by-step process that any person,
-                regardless of technical knowledge, can follow to configure the skill.
+                with limited technical knowledge, can follow to configure the skill.
             </p>
-        </div>
+
     </div>
 
     <br>
 
     <div id="glossary" class="row">
+        <span><h3 class="text-center">Glossary</h3></span>
         <ul>
-            <li class="col-md-8 col-md-offset-2">
-
+            <li >
                 <strong>Alexa skill</strong>
 
                 : Alexa’s capabilities to perform tasks. Skills enable customers to verbally
                 interact with devices in a more intuitive way. Examples of skills include the ability to play music,
                 answer general questions, set an alarm or timer, etc...
             </li>
-            <li class="col-md-8 col-md-offset-2">
+            <li >
 
                 <strong>Alexa Skills kit</strong>
-
                 : a software framework that allows developers to add skills to Alexa.
-                See : Alexa skills kit
+                <p class="tip">See :<a href="https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit#Ready to start?">
+                    Alexa skills kit</a></p>
             </li>
-            <li class="col-md-8 col-md-offset-2">
+            <li >
 
                 <strong>Custom Alexa skill</strong>
                 : a skill that can be custom-built and personalized with specific user requirements
             </li>
-            <li class="col-md-8 col-md-offset-2">
+            <li >
 
                 <strong>Alexa Smart Home skill</strong>
                 : an Alexa skill that is specialized in controlling connected IOT (Internet of Things) devices.
-                See : Smart Home Skills
+                <p class="tip">See : <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/content/smart-home">
+                    Smart Home Skills</a></p>
             </li>
-            <li class="col-md-8 col-md-offset-2">
+            <li >
 
                 <strong>(Amazon Web Services)</strong>
                 : cloud-based service by Amazon where Alexa code runs.
             </li>
-            <li class="col-md-8 col-md-offset-2">
+            <li >
                 <strong>Lambda Functions</strong>
                 : The Alexa code which runs on AWS.
-                See : AWS Lambda
+                <p class="tip">See : <a href="http://aws.amazon.com/lambda/">AWS Lambda</a></p>
             </li>
 
         </ul>
@@ -75,8 +76,8 @@
 
     <div id="Note" class="row">
         <br>
-        <p> Note: If you do not Alexa-enabled device, you can use third part Alexa-enabled services, such as Echosim.io to
-            test your Alexa skill.
+        <p> Note: If you do not Alexa-enabled device, you can use third part Alexa-enabled services, such as
+            <a href="https://echosim.io/">Echosim.io</a> to test your Alexa skill.
         </p>
         <br>
         <p>
@@ -84,20 +85,22 @@
         </p>
     </div>
 
+    <hr>
+
     <div id="setup" class="row">
         <p>
-        <h3 class="text-center">Setup</h3>
+        <h3 class="text-center" style="margin-top: 0px">Setup</h3>
         <h4>Setting up an Alexa Skill consists of 2 major steps :</h4>
         </p>
-        <ol>
-            <li>Setting up the brain of the Alexa skill (i.e Lambda Functions)</li>
-            <li>Registering the Alexa skill</li>
+        <ol type="A">
+            <li><strong>Setting up the brain of the Alexa skill (i.e Lambda Functions)</strong></li>
+            <li><strong>Registering the Alexa skill</strong></li>
         </ol>
-
+        <hr>
 
         <div id="stepA" class="row">
             <div class="row">
-                <h5>A. Setting up the brain of the Alexa skill.</h5>
+                <h4 class="text-left">A. Setting up the brain of the Alexa skill.</h4>
                 <p class="tip"> see: <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function">Creating an AWS Lambda Function for a Skill.
                     </a> For advanced/in-depth details
                 </p>
@@ -106,7 +109,7 @@
             <ol>
                 <li>Sign in or Create an account in
                     <a href="http://aws.amazon.com/">Amazon Web Services </a><br>
-                    <p class="tip ">!! A free account can handle an Alexa skill for almost every occasion.Check out
+                    <p class="tip "> A free account can handle an Alexa skill on almost every occasion. Check out
                         <a href="http://aws.amazon.com/lambda/pricing/">Lambda free tier</a> for more info.
                     </p>
                 </li>
@@ -118,10 +121,11 @@
                     Click the region drop-down in the upper-right corner of the console window and select <strong>US East (N. Virginia)</strong>.
                 </li>
                 <li>
-                    Click the <strong>‘Lambda’</strong> link under the <strong>Compute</strong> section.
+                    Click the <strong>‘Lambda’</strong> link under the <strong>Compute</strong> section (fig. 1).
 
-                    <div >
-                        <img src="app/components/guide/screenshots/scrnShtStA4.png"  style="max-height: 250px" >
+                    <div class="text-center">
+                        <br>
+                        <img src="app/components/guide/screenshots/scrnStA4.png"  style="max-height: 250px" >
                     </div>
                 </li>
                 <li>
@@ -131,17 +135,18 @@
                     In the blueprint tab, click <strong>‘Skip’</strong> at the bottom right.
                 </li>
                 <li>
-                    When prompted to configure triggers, click the box and select <strong>Alexa Skills Kit</strong>,
+                    When prompted to configure triggers (fig. 2), click the box and select <strong>Alexa Skills Kit</strong>,
                     then click <strong>'Next'</strong>> which will show the Configure Function View.
 
-                    <div>
+                    <div class="text-center">
+                        <br>
                         <img src="app/components/guide/screenshots/scrnStA7.png"  style="max-height: 250px" >
                     </div>
                 </li>
                 <li>
                     Configure <strong>Function View</strong> – change the items listed below:
 
-                    <ol>
+                    <ol type="a">
                         <li>Give a <strong>Name</strong> to the function</li>
                         <li>Give a <strong>Description</strong> to the function</li>
                         <li>Keep the <strong>runtime</strong> as <strong>Node.js 4.3</strong></li>
@@ -169,7 +174,7 @@
 
         <div id="stepB" class="row">
             <div class="row">
-                <h5>B. Registering the Alexa skill.</h5>
+                <h4 class="text-left">B. Registering the Alexa skill.</h4>
                 <p class="tip">
                     see: <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/registering-and
                     -managing-alexa-skills-in-the-developer-portal#registering-an-alexa-skill"> Registering an Alexa Skill</a>
@@ -180,8 +185,9 @@
             <ol>
                 <li>Create an account or sign in to your <a href="https://developer.amazon.com/">Amazon Developer account</a>.</li>
                 <li>After signing in, click the <strong>‘Alexa’</strong> tab on the web page.</li>
-                <li>In the next window, click on the <strong>Alexa Skills Kit</strong> button.
-                    <div>
+                <li>In the next window, click on the <strong>Alexa Skills Kit</strong> button (fig. 3).
+                    <div class="text-center">
+                        <br>
                         <img src="app/components/guide/screenshots/scrnStB3.png"  style="max-height: 250px" >
                     </div>
                 </li>
@@ -220,9 +226,10 @@
                         <li>Select the <strong>Service Endpoint Type</strong> as <strong>‘AWS Lambda ARN (Amazon Resource Name)’</strong>
                         </li>
                         <li>Select the region for <strong>‘AWS Lambda ARN’</strong> as <strong>‘North America’</strong></li>
-                        <li>Paste the ARN value which was copied from the Amazon AWS website.
+                        <li>Paste the ARN value which was copied from the Amazon AWS website (fig. 4).
 
-                            <div>
+                            <div class="text-center">
+                                <br>
                                 <img src="app/components/guide/screenshots/scrnStB7.png"  style="max-height: 250px" >
                             </div>
                         </li>
@@ -290,13 +297,13 @@
                 Once you receive the message, install the skill on your Alexa app in order to start using
                 the skill on your Amazon Alexa device.
             </li>
-            <li class="alert-danger">
+            <li class="danger-text">
                 If the skill could not be certified, an email will be sent by Amazon with information on what needs to be corrected.<br>
                 <p>see: <a href="https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/
                 alexa-skills-kit-submission-checklist">Certification Requirements for Custom Skills</a> for more details.
                 </p>
             </li>
-            <li class="alert-danger">
+            <li class="danger-text">
                 Pay close attention and stick to the guidelines when entering publishing information. Failure to follow the guidelines will
                 cause Amazon to deny certification to the Alexa skill.
             </li>

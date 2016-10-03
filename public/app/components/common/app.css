@@ -214,3 +214,16 @@ table .action {
   font-size: 13px;
 }
 
+.guide li{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.guide p{
+  margin-top: 3px;
+  margin-bottom: 0px;
+}
+
+.danger-text{
+  color: #a94442;
+}
